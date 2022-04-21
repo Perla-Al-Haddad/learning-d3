@@ -1,0 +1,108 @@
+ <html>
+	<head>
+		<title>Pausing and Resuming D3-Transitions</title>
+		<script type="text/javascript" src="sizzle.js"></script>
+		<script type="text/javascript" src="../highlight/highlight.pack.js"></script>
+		<script type="text/javascript">
+			hljs.tabReplace = '    ';
+			hljs.initHighlightingOnLoad();
+		</script>
+		<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="../highlight/styles/vs.css" type="text/css" media="screen" />
+
+		<script type="text/javascript" src="Transformation.js"></script>
+		<script type="text/javascript" src="Main.js"></script>
+	</head>
+	<body onload = "main();">
+	<div>
+		<h1>Pausing and Resuming D3-Transitions</h1>
+		Pausing and resuming of d3 - transitions is not a basic functionality provided by d3.
+		But it is possible. I'll show you how!
+		<h2>Basic Transition</h2>
+		Here is a basic transition as an example to work with:
+		<!-- <div id="transition_example" class="transition" ></div> -->
+		<br style="clear:both;">
+		Over the time the x-coordinate of the red circle advances with constant speed representing the time.
+		The y-coordinate is the value which is manipulated by the transition we want to examine.
+		<br />
+		Example code for starting the transition:
+<pre><code class="javascript">
+    var c = d3.select("circle");
+    c.attr("cy",0);
+    c.transition()
+        .duration( time )
+        .ease( ease )
+        .attr( "cy", 1 );
+</code></pre>
+		<hr>
+		<h2>Pausing</h2>
+		The most easy part is to pause or stop a transition:
+		Select the element that does the transition and override the currently active transition with a new blank one with duration(0).
+<pre><code class="javascript">
+	var c = d3.select("circle");
+	c.transition()
+		.duration( 0 );
+</code></pre>
+		<!-- <div id="transition_example_stop" class="transition" ></div> -->
+
+		<hr>
+		<h2>Resuming</h2>
+
+		<p>But now how do we resume the recently stopped transition?
+		Obviously when we start the new transition it should only last
+		for the time the stopped one would have taken.
+		So we need to track the progression of a transition. You could
+		look up the attr() changed by the transition and calculate the
+		passed time. This may not work because the transition might
+		not be linear. </p>
+
+		<p>Personally I set an unused attribute (e.g. "T") of another element  to zero
+		at the begin and transition it linearly to one.</p>
+<pre><code class="javascript">
+	var e = d3.select("#time");
+	e.attr("T",0);
+	c.transition()
+		.duration( time )
+		.ease( "linear" )
+		.attr("T",1);
+</code></pre>
+
+		<p>Now you can look up the progress of the transition at any time
+		and we can calculate the time that is leftover.</p>
+
+		<p>Now lets try to restart the original transition with the left duration.</p>
+
+		<!-- <div id="transition_example_stop_resume" class="transition" ></div> -->
+
+		<p>As you can see this works only for linear easing.
+		To get proper results we have to adapt the easing function.</p>
+		<p>First we map the x-coordinate from 0..1 in the resumed transition to elapsed_time..1 in the original
+		transition. Then we can pass this to the original easing function f(x). The results of this must again be
+		mapped; from f(x)..1 to 0..1.</p>
+		The following function does exactly this:
+<pre><code class="javascript">
+function resumed_ease( ease, elapsed_time ) {
+    var y = typeof ease == "function" ? ease : d3.ease.call(d3, ease);
+    return function( x_resumed ) {
+        var x_original = d3.scale
+                        .linear()
+                        .domain([0,1])
+                        .range([elapsed_time,1])
+                        ( x_resumed );
+        return d3.scale
+                 .linear()
+                 .domain([ y(elapsed_time), 1 ])
+                 .range([0,1])
+                 ( y ( x_original ) );
+    };
+}
+</code></pre>
+		<p>Let's see how this works:</p>
+		<div id="transition_example_stop_properresume" class="transition" ></div>
+		<strong>Voil�!</strong>
+		<p>Now you know how to pause and resume transitions in d3! Congratulations</p>
+		<img src="http://vg04.met.vgwort.de/na/1fd26beda64349378d10a49e500a249c" width="1" height="1" alt="" />
+	</div>
+	</body>
+</html>

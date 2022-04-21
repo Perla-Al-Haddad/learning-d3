@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+<body>
+    <svg width="960" height="500">
+        <circle id="circle"
+            cx="480"
+            cy="250"
+            r="10"
+            fill="#5599FF"
+            stroke="black"
+        ></circle>
+    </svg>
+
+    <script>
+
+        document.addEventListener("mousemove", function(e) {
+            let circle = document.getElementById("circle");
+            circle.setAttribute("cx", e.clientX - circle.getAttribute('r')/2);
+            circle.setAttribute("cy", e.clientY - circle.getAttribute('r')/2);
+        })
+
+        document.addEventListener("click", function(e) {
+            let svg = d3.select("svg").append('circle')
+                .attr('cx', e.clientX - circle.getAttribute('r')/2)
+                .attr('cy', e.clientY - circle.getAttribute('r')/2)
+                .attr('r', 10)
+        })
+
+    </script>
+</body>
+</html>

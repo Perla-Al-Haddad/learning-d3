@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.4.4/d3.min.js"></script>
+    <style>
+        .sand-svg {
+            background-color: white;
+        }
+        body {
+            background-color: #f0f2f9;
+            font-family: soleil, "Inter UI", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+    </style>
+</head>
+<body>
+    <script>
+        
+        d3.json("mydata.json"). then(function(dataArray) {
+            
+            console.log(dataArray)
+
+            var svg_width = 500;
+            var svg_height = 300;
+            var bars_container_height = 280;
+
+            var max_count = d3.max(dataArray, function(d) { return d.count; });
+
+            var widthScale = d3.scaleLinear()
+                            .domain([0, max_count + 5])
+                            .range([0, svg_width]);
+
+            var colorScale = d3.scaleLinear()
+                            .domain([0, max_count])
+                            .range(["#32325D", "#3A8DDE"]);
+
+            var xAxis = d3.axisBottom()
+                            .scale(widthScale);
+
+            var canvas = d3.select("body")
+                            .append("svg")
+                            .attr("width", svg_width)
+                            .attr("height", svg_height)
+                            .attr("class", "sand-svg")
+                            .append("g")
+                            .attr("transform", "translate(20, 0)");
+
+            var bar_container_width = bars_container_height/dataArray.length;
+
+            var gap = 12;
+            var bar_width = bar_container_width - gap*2;
+
+            var bars = canvas.selectAll("rect")
+                            .data(dataArray)
+                            .enter()
+                                .append("rect")
+                                .attr("fill", function(d) { return colorScale(d.count); })
+                                // .attr("width", function(d) { return widthScale(d); })
+                                .attr("height", bar_width)
+                                .attr("y", function(d, i) { return i * bar_container_width + gap })
+                                .transition()
+                                    .duration(1500)
+                                    .attr("width", function(d) { return widthScale(d.count); });
+            
+            var labels = canvas.selectAll("text")
+                            .data(dataArray)
+                            .enter()
+                                .append("text")
+                                .attr("fill", "white")
+                                .attr("text-anchor", "end")
+                                .attr("x", function(d) { return widthScale(d.count) - 10; })
+                                .attr("y", function(d, i) { return i * bar_container_width + bar_container_width/2 + 4 })
+                                .text(function(d) { return d.name })
+
+            canvas.append("g")
+                        .attr("transform", "translate(0, " + bars_container_height + ")")
+                        .call(xAxis);
+
+        })
+
+    </script>    
+</body>
+</html>

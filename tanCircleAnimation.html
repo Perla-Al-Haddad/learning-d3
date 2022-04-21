@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D3 Charts</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+<body>
+    <svg width="960" height="500"></svg>
+    <script>
+        var svg = d3.select("svg").style("background-color", "black")
+        var width = svg.attr("width");
+        var height = svg.attr("height");
+        var n = 40;
+        var circles = svg.selectAll("circle").data(d3.range(n)).enter().append("circle")
+            .attr("cx", function(d) { return (d + 0.5) * width / n; })
+            .attr("r", width / n / 2)
+            .attr("fill", "white");
+        d3.timer(function (time) {
+            circles.attr("cy", function(d) {
+                return (Math.tan(d / 10 + time / 1000)) * height / 4 + height / 2;
+            })
+        })
+    </script>
+</body>
+</html>

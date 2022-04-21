@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <title>UN SDG Wheel</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" media="all">
+
+    <style>
+        body {
+            font-family: soleil, "Inter UI", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+
+        .chart-neutral {
+            fill: #ADB5BD;
+        }
+
+        .chart-low {
+            fill: #cc476f;
+        }
+
+        .chart-medium {
+            fill: #f5be58;
+        }
+
+        .chart-high {
+            fill: #06b27d;
+        }
+
+        .gaugeChart-tick {
+            /* fill: none; */
+        }
+
+        .gaugeChart-tick-neutral {
+            stroke: #ADB5BD;
+        }
+
+        .gaugeChart-tick-low {
+            stroke: #cc476f;
+        }
+
+        .gaugeChart-tick-medium {
+            stroke: #f5be58;
+        }
+
+        .gaugeChart-tick-high {
+            stroke: #06b27d;
+        }
+
+        #Goal_Name {
+            font-weight: 700;
+            font-size: 30px;
+            fill: #32325D;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container row">
+        <div id="sdgWheelDIV" class="container col-xl-3">
+            <svg style="position: absolute;"></svg>
+        </div>
+    </div>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script>
+        const padding = 50;
+        let dims = parseInt(d3.select("#sdgWheelDIV").style("width"));
+        const r = (dims - padding) / 2;
+        let country = "egy";
+
+        function resize() {
+            dims = parseInt(d3.select("#sdgWheelDIV").style("width"));
+            d3.select("#sdgWheelDIV").select("svg").style("width", dims + "px").style("height", dims + "px")
+        }
+        d3.select(window).on("resize", resize);
+
+        $(document).ready(function () {
+            var data = [];
+
+            for (let i = 0; i < 17; i++)
+                data.push(1);
+
+            var color = d3.scaleOrdinal()
+                .range(["#eb1c2d", "#d3a029", "#279b48", "#c31f33", "#ef402b", "#00aed9",
+                    "#fdb713", "#8f1838", "#f36d25", "#e11484", "#f99d26", "#cf8d2a",
+                    "#48773e", "#007dbc", "#5dbb46", "#01558b", "#183668"]);
+
+            var svg = d3.select("svg")
+                .attr("width", Math.floor(dims))
+                .attr("height", Math.floor(dims))
+                .attr("viewBox", "0 0 " + Math.floor(dims) + " " + Math.floor(dims))
+                .attr("preserveAspectRatio", "xMinYMin meet");
+
+            var group = svg.append("g")
+                .attr("transform", "translate(" + dims / 2 + ", " + dims / 2 + ")");
+
+            var arc = d3.arc()
+                .outerRadius(r - r * 0.32)
+                .innerRadius(r);
+
+            var pie = d3.pie()
+                .value(function (d) { return d; });
+
+            var arcs = group.selectAll(".arc")
+                .data(pie(data))
+                .enter()
+                .append("g")
+                .attr("class", "arc");
+
+            arcs.append("path")
+                .attr("d", arc)
+                .attr("name", function (d, i) { return i; })
+                .attr("stroke", "white")
+                .attr("stroke-width", "3")
+                .attr("fill", function (d, i) { return color(i); })
+                .transition()
+                .attrTween('d', function (d) {
+                    var i = d3.interpolate(d.startAngle, d.endAngle);
+                    return function (t) {
+                        d.endAngle = i(t);
+                        return arc(d);
+                    }
+                });
+
+            arcs.on("click", function (e) {
+                d3.selectAll(".arc")
+                    .transition()
+                    .attr("transform", 'translate(0, 0)');
+                d3.select(this)
+                    .transition()
+                    .duration(100)
+                    .attr('transform', function (d) { return 'translate(' + arc.centroid(d)[0] / 20 + ',' + arc.centroid(d)[1] / 20 + ')'; });
+                $.get("https://visor.unescwa.org/dbs/ArabSDG/ByCountry/" + country.toUpperCase(), function (data) {
+                    goal_index = parseInt(e.target.getAttribute("name"));
+                    let finalcoloravg = data["response"][goal_index]["finalcoloravg"];
+                    let goalName = data["response"][goal_index].name.split(": ")[1];
+                    d3.select("#Goal_Name").text(goalName)
+                    updateNeedleWrapper(finalcoloravg);
+                })
+            })
+
+            arcs.on('mouseover', function (e) {
+                d3.select(this)
+                    .transition()
+                    .duration(200)
+                    .attr('opacity', '.7')
+            });
+
+            arcs.on('mouseout', function () {
+                d3.select(this)
+                    .transition()
+                    .duration(200)
+                    .attr('opacity', '1')
+            });
+
+            arcs.append("svg:image")
+                .attr("name", function (d, i) { return i; })
+                .attr("xlink:href", function (d, i) { return "sdg-" + (i + 1) + ".svg"; })
+                arcs.select("image")
+                .attr("width", r * 0.32 * 0.75)
+                .attr("height", r * 0.32 * 0.75)
+                .attr("transform-origin", function (d) { 
+                    return (-r * 0.32 * 0.75)/2 + " " + (-r * 0.32 * 0.75)/2;
+                })
+                .attr("transform", function (d) {
+                    return "translate(" + (arc.centroid(d)[0]-(r * 0.32 * 0.75)/2)  + "," + (arc.centroid(d)[1]-(r * 0.32 * 0.75)/2) + ")"; 
+                })
+
+            group.select(".arc")
+                .transition()
+                .duration(100)
+                .attr('transform', function (d) { return 'translate(' + arc.centroid(d)[0] / 20 + ',' + arc.centroid(d)[1] / 20 + ')'; });
+
+            var chart = svg.append("g")
+                .attr("class", "chart")
+                .attr("transform", "translate(" + dims / 2 + ", " + dims / 2 + ")");
+
+            let startAngle = 68;
+            const tickSpacing = 17.5;
+            const small_tickSpacing = 3.5;
+            const neutral_lastTickAngle = 123;
+            const low_lastTickAngle = neutral_lastTickAngle + (neutral_lastTickAngle - startAngle);
+            const medium_lastTickAngle = low_lastTickAngle + (neutral_lastTickAngle - startAngle) + 4;
+            const high_lastTickAngle = medium_lastTickAngle + (neutral_lastTickAngle - startAngle) + 4;
+            const tickWidth = 4;
+            const small_tickWidth = 1;
+
+            let small_angle = draw_section_ticks(chart, startAngle, neutral_lastTickAngle, "neutral", small_tickSpacing, small_tickWidth);
+            small_angle = draw_section_ticks(chart, small_angle, low_lastTickAngle, "low", small_tickSpacing, small_tickWidth);
+            small_angle = draw_section_ticks(chart, small_angle, medium_lastTickAngle, "medium", small_tickSpacing, small_tickWidth);
+            small_angle = draw_section_ticks(chart, small_angle, high_lastTickAngle, "high", small_tickSpacing, small_tickWidth);
+
+            chart.append("circle")
+                .attr("cx", 0)
+                .attr("cy", 0)
+                .attr("r", dims / 5.1)
+                .attr("fill", "white");
+
+            let angle = draw_section_ticks(chart, startAngle, neutral_lastTickAngle, "neutral", tickSpacing, tickWidth);
+            angle = draw_section_ticks(chart, angle, low_lastTickAngle, "low", tickSpacing, tickWidth);
+            angle = draw_section_ticks(chart, angle, medium_lastTickAngle, "medium", tickSpacing, tickWidth);
+            angle = draw_section_ticks(chart, angle, high_lastTickAngle, "high", tickSpacing, tickWidth);
+
+            chart.append("circle")
+                .attr("cx", 0)
+                .attr("cy", 0)
+                .attr("r", dims / 5.4)
+                .attr("fill", "white");
+
+            var neutral_gauge_arc = d3.arc().startAngle(-2).endAngle(-1).outerRadius(r * 0.46).innerRadius(r * 0.49);
+            var low_gauge_arc = d3.arc().startAngle(-1).endAngle(0).outerRadius(r * 0.46).innerRadius(r * 0.49);
+            var medium_gauge_arc = d3.arc().startAngle(0).endAngle(1).outerRadius(r * 0.46).innerRadius(r * 0.49);
+            var high_gauge_arc = d3.arc().startAngle(1).endAngle(2).outerRadius(r * 0.46).innerRadius(r * 0.49);
+
+            repaintGauge = function () {
+                chart.append("path").attr("d", neutral_gauge_arc).attr("class", "chart-neutral").attr("stroke", "white").attr("stroke-width", 5)
+                chart.append("path").attr("d", low_gauge_arc).attr("class", "chart-low").attr("stroke", "white").attr("stroke-width", 5)
+                chart.append("path").attr("d", medium_gauge_arc).attr("class", "chart-medium").attr("stroke", "white").attr("stroke-width", 5)
+                chart.append("path").attr("d", high_gauge_arc).attr("class", "chart-high").attr("stroke", "white").attr("stroke-width", 5)
+            };
+
+            chart.append("text")
+                .text("")
+                .attr('id', "Goal_Name")
+                .attr("text-anchor", "middle")
+                .attr("x", 0)
+                .attr("y", dims / 7);
+
+            repaintGauge();
+
+            needle = new Needle(chart);
+            needle.render();
+
+            $.get("https://visor.unescwa.org/dbs/ArabSDG/ByCountry/" + country.toUpperCase(), function (data) {
+                let finalcoloravg = data["response"][0]["finalcoloravg"];
+                let goalName = data["response"][0].name.split(": ")[1];
+                d3.select("#Goal_Name").text(goalName)
+                updateNeedleWrapper(finalcoloravg);
+            });
+        });
+
+        // Utility methods
+        percToDeg = function (perc) {
+            return perc * 360;
+        };
+        percToRad = function (perc) {
+            return degToRad(percToDeg(perc));
+        };
+        degToRad = function (deg) {
+            return deg * Math.PI / 180;
+        };
+
+        function draw_section_ticks(chart, start_angle, last_TickAngle, type_str, tickSpacing, tickWidth) {
+            let angle = start_angle;
+            while (angle <= last_TickAngle) {
+
+                chart.append("line")
+                    .attr("class", "gaugeChart-tick gaugeChart-tick-" + type_str)
+                    .attr("stroke", "black")
+                    .attr('x1', 0)
+                    .attr('y1', r * 0.48)
+                    .attr('x2', 0)
+                    .attr('y2', 0)
+                    .attr('stroke-width', tickWidth)
+                    .attr('transform', `rotate(${angle} ,0 ,0)`);
+
+                angle += tickSpacing;
+            }
+            angle -= tickSpacing - 5;
+            return angle;
+        }
+
+        function updateNeedle(perc, type_str) {
+            needle.moveTo(perc);
+            d3.select("#client-needle")
+                .attr("class", "needle chart-" + type_str);
+            d3.select(".needle-center")
+                .attr("class", "needle-center chart-" + type_str);
+        }
+
+        function updateNeedleWrapper(finalcoloravg) {
+            switch (finalcoloravg) {
+                case '0':
+                    updateNeedle(0.15, "neutral");
+                    break;
+                case '1':
+                    updateNeedle(0.48, "low");
+                    break;
+                case '2':
+                    updateNeedle(0.8, "medium");
+                    break;
+                case '3':
+                    updateNeedle(1.1, "high");
+                    break;
+            }
+        }
+        
+        var Needle = function () {
+            //Helper function that returns the `d` value for moving the needle
+            var recalcPointerPos = function (perc) {
+                var centerX, centerY, leftX, leftY, rightX, rightY, thetaRad, topX, topY;
+                thetaRad = percToRad(perc / 2) - (0.4);
+                centerX = 0;
+                centerY = 0;
+                topX = centerX - this.len * Math.cos(thetaRad);
+                topY = centerY - this.len * Math.sin(thetaRad);
+                leftX = centerX - this.radius * Math.cos(thetaRad - Math.PI / 2);
+                leftY = centerY - this.radius * Math.sin(thetaRad - Math.PI / 2);
+                rightX = centerX - this.radius * Math.cos(thetaRad + Math.PI / 2);
+                rightY = centerY - this.radius * Math.sin(thetaRad + Math.PI / 2);
+                return "M " + leftX + " " + leftY + " L " + topX + " " + topY + " L " + rightX + " " + rightY;
+            };
+            function Needle(el) {
+                this.el = el;
+                this.len = dims / 5;
+                this.radius = this.len / 20;
+            }
+            Needle.prototype.render = function () {
+                this.el.append('circle').attr('class', 'needle-center').attr('cx', 0).attr('cy', 0).attr('r', this.radius);
+                return this.el.append('path').attr('class', 'needle').attr('id', 'client-needle').attr('d', recalcPointerPos.call(this, 0));
+            };
+            Needle.prototype.moveTo = function (perc) {
+                var self,
+                    oldValue = this.perc || 0;
+                this.perc = perc;
+                self = this;
+                this.el.transition().delay(100).ease(d3.easeBounce).duration(500).select('.needle').tween('progress', function () {
+                    return function (percentOfPercent) {
+                        var progress = oldValue + (percentOfPercent * (perc - oldValue));
+                        return d3.select(this).attr('d', recalcPointerPos.call(self, progress));
+                    };
+                });
+            };
+            return Needle;
+        }();
+
+    </script>
+</body>
+
+</html>
