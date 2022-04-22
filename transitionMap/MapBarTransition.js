@@ -106,15 +106,9 @@ function loadRichnessGraph() {
     var features = svg.append("g");
     var features1 = svg.append("g");
     var features2 = svg.append("g");
-    console.log("TEST")
-
-    // $.get("UN.json", function(t, e) {
-    //     console.log("test");
-    // })
 
     d3.json("UN.json").then(function (e) {
         console.log(e)
-        // if (t) return console.error(t);
 
         topojson.feature(e, e.objects.UNMap);
         topojson.feature(e, e.objects.UNBorders);

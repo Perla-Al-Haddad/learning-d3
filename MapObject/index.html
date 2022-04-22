@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        media="all">
+
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <style>
+        body {
+            background-color: #f0f2f9;
+            padding-top: 50px;;
+        }
+
+        path.country:hover {
+            fill: rgba(216, 221, 230, 0.571) !important;
+        }
+
+        path.border {
+            stroke-width: 0.4px;
+            vector-effect: non-scaling-stroke;
+        }
+
+        path {
+            stroke-width: 0.5px;
+            vector-effect: non-scaling-stroke;
+        }
+
+        .bar {
+            fill: #8d95ee;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="col" id="MapDIV"></div>
+    </div>
+    <script src="D3BarChart.js"></script>
+    <script src="D3Map.js"></script>
+    <script src="ChartTransition.js"></script>
+    <script src="Main.js"></script>
+</body>
+</html>
