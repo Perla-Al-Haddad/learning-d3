@@ -53,6 +53,7 @@ class D3PieChart {
     }
 
     renderArcs(data) {
+        let that = this;
         let colorScale = this.getColorScale(data); 
         this.arcs = this.pieGroup.select(".slices").selectAll(".arc")
             .data(this.pie(data))
@@ -64,19 +65,21 @@ class D3PieChart {
                 .attr("stroke", "white")
                 .style("stroke-width", "1.5px")
                 .attr("id", function (d) { return "arc_" + d.data.iso; })
-                .attr("fill", function (d, i) { return colorScale(i); });
+                .attr("fill", function (d, i) { return colorScale(i); })
+                .attr("orgStartAngle", function(d) { return d.startAngle; })
+                .attr("orgEndAngle", function(d) { return d.endAngle; })
 
         this.arcs.on('mouseover', function (e) {
             d3.select(this)
                 .transition()
                 .duration(500)
                 .attr('transform', function (d) { return 'scale(1.1, 1.1)'; });
-            d3.select("#label_" + e.target.__data__.data.iso)
+            d3.select("#" + that.id).select("#label_" + e.target.__data__.data.iso)
                 .transition()
                 .duration(500)
                 .attr("font-size", "1.5em")
                 .attr("display", function (d) { if (d3.select(this).attr("class") == "hidden_cluster") return "block"; })
-            d3.select("#line_" + e.target.__data__.data.iso)
+            d3.select("#" + that.id).select("#line_" + e.target.__data__.data.iso)
                 .transition()
                 .duration(500)
                 .attr("display", function (d) { if (d3.select(this).attr("class") == "hidden_cluster") return "block"; })
@@ -85,16 +88,17 @@ class D3PieChart {
             d3.select(this)
                 .transition()
                 .attr("transform", 'translate(0, 0)');
-            d3.select("#label_" + e.target.__data__.data.iso)
+            d3.select("#" + that.id).select("#label_" + e.target.__data__.data.iso)
                 .transition()
                 .duration(500)
                 .attr("font-size", "1em")
                 .attr("display", function (d) { if (d3.select(this).attr("class") == "hidden_cluster") return "none"; })
-            d3.select("#line_" + e.target.__data__.data.iso)
+            d3.select("#" + that.id).select("#line_" + e.target.__data__.data.iso)
                 .transition()
                 .duration(500)
                 .attr("display", function (d) { if (d3.select(this).attr("class") == "hidden_cluster") return "none"; })
         });
+
     }
 
     renderLabels(data) {
@@ -172,19 +176,22 @@ class D3PieChart {
                     (d3.select("#label_" + d.data.iso).attr("x") > 0) ? pos[0] += 15 : pos[0] -= 15
                     return [that.arc.centroid(d), that.outerArc.centroid(d), pos];
                 })
-                .attr("display", function(d) { return d3.select("#label_" + d.data.iso).attr("display") })
+                .attr("display", function(d) { return d3.select("#" + that.id).select("#label_" + d.data.iso).attr("display") })
                 .attr("class", function(d) { return (d3.select(this).attr("display") == "none") ? "hidden_cluster" : "" })
             .exit()
             .remove();
     }
 
-    getColorScale(data) {
+    getCountryNames(data, key) {
         let country_names = [];
         for (let i = 0; i < data.length; i++)
-            country_names.push(data[i].country)
+            country_names.push(data[i][key])
+        return country_names;
+    }
 
+    getColorScale(data) {
         return d3.scaleOrdinal()
-            .domain(country_names)
+            .domain(this.getCountryNames(data, "country"))
             .range([
                 "#5470c6",
                 "#91cc75",

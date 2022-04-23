@@ -95,6 +95,21 @@ class D3Map {
             .attr("orgColoc", function (d) { return ((d.properties.value != undefined) ? colorScale(d.properties.value) : "white") })
             .attr("id", function (d) { return "id_" + d.properties.ISO3CD })
             .attr("stroke-width", 0);
+
+        if (d3.select("#" + this.id).select("svg").select(".pieGroup")._groups[0][0]) {
+            let that = this;
+            this.dataLayer.selectAll("path.country:not(.empty)")
+                .attr("arc_x", function(d) {
+                    let cur_arc = d3.select("#" + that.id).select("svg").select(".pieGroup").select("#arc_" + d.properties.ISO3CD);
+                    let cur_arc_x = getBoundingBoxCenter(cur_arc.node())[0];
+                    return cur_arc_x;
+                })
+                .attr("arc_y", function(d) {
+                    let cur_arc = d3.select("#" + that.id).select("svg").select(".pieGroup").select("#arc_" + d.properties.ISO3CD);
+                    let cur_arc_y = getBoundingBoxCenter(cur_arc.node())[1];
+                    return cur_arc_y;
+                });
+        }
     }
 
     filterData(data) {

@@ -1,16 +1,12 @@
 class MapBarTransition {
-    constructor(map_chart, bar_chart, transition_duration, wait_duration, start_option) {
-        this.map_chart = map_chart;
-        this.bar_chart = bar_chart;
+    constructor(chart_id, transition_duration, wait_duration, start_option, data_file_path) {
         this.transition_duration = transition_duration;
         this.wait_duration = wait_duration;
-
         this.cur_option = start_option;
+        this.chart_id = chart_id;
 
-        if (this.map_chart.id != this.bar_chart.id) 
-            console.error("Charts do not belong to the same div");
-        else
-            this.chart_id = this.map_chart.id;
+        this.map_chart = new D3Map(this.chart_id, 0.6, "UN.json", data_file_path);;
+        this.bar_chart = new D3BarChart(this.chart_id, 0.6, [175, 50, 50, 25], data_file_path);
     }
 
     map_bar_transition() {
@@ -116,7 +112,7 @@ class MapBarTransition {
                 this.cur_option = "map";
                 this.bar_map_transition();
             }
-        }, this.wait_duration)
+        }, this.wait_duration);
     }
 
     bindEvents(timer) {
@@ -126,5 +122,10 @@ class MapBarTransition {
         }, function () {
             timer = that.setTimer(); 
         });
+    }
+
+    resize() {
+        this.map_chart.resize();
+        this.bar_chart.resize();
     }
 }
