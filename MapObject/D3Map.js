@@ -1,15 +1,12 @@
 class D3Map {
-    constructor(DOM_ID, mapRatio, topojson_file_path, data_file_path, resize_func) {
-        
+    constructor(DOM_ID, chartRatio, topojson_file_path, data_file_path) {
         this.id = DOM_ID;
-        this.mapRatio = mapRatio;
+        this.chartRatio = chartRatio;
         this.topojson_file_path = topojson_file_path;
         this.data_file_path = data_file_path;
 
-        this.resize_func = resize_func;
-
         this.width = parseInt(d3.select("#" + this.id).style("width"));
-        this.height = this.width * this.mapRatio;
+        this.height = this.width * this.chartRatio;
 
         this.projection = d3.geoMercator()
             .translate([this.width / 2, this.height / 2])
@@ -17,10 +14,10 @@ class D3Map {
             .center([20, 15]);
         this.path = d3.geoPath().projection(this.projection);
 
-        this.bindEvents();
+        this.render();
     }
 
-    init() {
+    render() {
         if (d3.select("#" + this.id).select("svg")._groups[0][0]) {
             this.svg = d3.select("#" + this.id).select("svg")
         } else {
@@ -30,12 +27,11 @@ class D3Map {
                 .attr("height", this.height)
                 .attr("viewBox", "0 0 " + this.width + " " + this.height)
                 .attr("preserveAspectRatio", "xMinYMin meet")
-                .style("background-color", "white")
-                .attr("map-ratio", this.mapRatio);
+                .style("background-color", "white");
         }
 
         this.chart_group = this.svg.append("g")
-            .attr("class", "chartGroup");
+            .attr("class", "mapGroup");
 
         this.dataLayer = this.chart_group.append("g").attr("class", "data-layer");
         this.solidBorderLayer = this.chart_group.append("g").attr("class", "solid-border-layer");
@@ -55,7 +51,7 @@ class D3Map {
                         topoData[i].properties.value = undefined;
                 }
 
-                this.renderData(topojson_content, this.getColorScale(filteredData))
+                this.renderData(topojson_content, this.getColorScale(filteredData));
             })) 
         });
     }
@@ -73,7 +69,7 @@ class D3Map {
                 .attr("stroke-width", .15)
                 .attr("fill", "none")
                 .attr("stroke", "#404040")
-                .attr("class", "border")
+                .attr("class", "border");
 
         this.dashedBorderLayer.selectAll("path")
             .data(topojson.feature(topojson_content, topojson_content.objects.UNBordersDashed).features)
@@ -84,7 +80,7 @@ class D3Map {
                 .attr("fill", "none")
                 .attr("stroke", "#404040")
                 .attr("stroke-dasharray", "3,3")
-                .attr("class", "border")
+                .attr("class", "border");
     }
 
     renderData(topojson_content, colorScale) {
@@ -98,13 +94,35 @@ class D3Map {
             .attr("name", function (d) { return d.properties.ISO3CD })
             .attr("orgColoc", function (d) { return ((d.properties.value != undefined) ? colorScale(d.properties.value) : "white") })
             .attr("id", function (d) { return "id_" + d.properties.ISO3CD })
-            .attr("stroke-width", 0)
+            .attr("stroke-width", 0);
     }
 
     filterData(data) {
         let filteredData = $.grep(data.data, function (n) { return (n.year == 2020 && n.value != '-'); });
         filteredData.sort(GetSortOrder("value"));
         return filteredData;
+    }
+
+    transtionToBarPosition(barChart) {
+        var that = this;
+        d3.select("#" + this.id).select("svg").selectAll("path.country:not(.empty)")
+            .transition() 
+            .duration(1000)
+            .attr("transform-origin", function (d) {
+                let this_x = getBoundingBoxCenter(this)[0];
+                let this_y = getBoundingBoxCenter(this)[1];
+                return this_x + " " + this_y;
+            })
+            .attr("transform", function (d) {
+                let transform_str = "";
+                let cur_bar = d3.select("#" + that.id).select("svg").select("#rect_" + d.properties.ISO3CD);
+                let cur_bar_y = cur_bar.attr("y")
+                cur_bar_y = Math.floor(cur_bar_y);
+                let this_x = getBoundingBoxCenter(this)[0];
+                let this_y = getBoundingBoxCenter(this)[1];
+                transform_str += "translate(" + (barChart.margins[0] - this_x) + ", " + (cur_bar_y - this_y) + ") scale(0,0)";
+                return transform_str;
+            });
     }
 
     getColorScale(data) {
@@ -117,9 +135,13 @@ class D3Map {
         
         return colorScale;
     }
-
-    bindEvents() {
-        d3.select(window).on("resize", this.resize_func)
+ 
+    resize() {
+        this.width = parseInt(d3.select("#" + this.id).style("width"));
+        this.height = this.width * this.chartRatio;
+        d3.select("#" + this.id).select("svg").attr("width", this.width);
+        d3.select("#" + this.id).select("svg").attr("height", this.height);
     }
+
 }
 

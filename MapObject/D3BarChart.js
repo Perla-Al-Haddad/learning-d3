@@ -1,25 +1,21 @@
 class D3BarChart {
-    constructor(DOM_ID, chartRatio, margins, gap, data_file_path, resize_func, hidden) {
+    constructor(DOM_ID, chartRatio, margins, data_file_path) {
         this.id = DOM_ID;
         this.chartRatio = chartRatio;
         this.margins = margins;
-        this.gap = gap;
         this.data_file_path = data_file_path;
-        this.hidden = hidden;
-
-        this.resize_func = resize_func;
-
+        
         this.width = parseInt(d3.select("#" + this.id).style("width"));
         this.height = this.width * this.chartRatio;
 
         this.bars_container_height = this.height - this.margins[2];
 
-        this.bindEvents();
+        this.render();
     }
 
-    init() {
+    render() {
         if (d3.select("#" + this.id).select("svg")._groups[0][0]) {
-            this.svg = d3.select("#" + this.id).select("svg")
+            this.svg = d3.select("#" + this.id).select("svg");
         } else {
             this.svg = d3.select("#" + this.id)
                 .append("svg")
@@ -27,8 +23,7 @@ class D3BarChart {
                 .attr("height", this.height)
                 .attr("viewBox", "0 0 " + this.width + " " + this.height)
                 .attr("preserveAspectRatio", "xMinYMin meet")
-                .style("background-color", "white")
-                .attr("map-ratio", this.mapRatio)
+                .style("background-color", "white");
         }
 
         this.bar_group = this.svg.append("g")
@@ -39,16 +34,13 @@ class D3BarChart {
             let filteredData = this.filterData(data);
             
             this.bar_container_width = this.bars_container_height / filteredData.length;
+            this.gap = this.bar_container_width/4;
             this.bar_width = this.bar_container_width - this.gap * 2;
             
             let widthScale = this.getWidthScale(filteredData);
             let yScale = this.getYScale(filteredData, "country");
 
             this.renderData(filteredData, widthScale, yScale);
-
-            if (this.hidden) {
-                this.hide_bar_chart();
-            }
         }));
     }
 
@@ -59,10 +51,10 @@ class D3BarChart {
             .scale(widthScale)
             .tickSize(-this.bars_container_height)
             .tickPadding(15)
-            .ticks(4)
+            .ticks(4);
 
         var yAxis = d3.axisLeft()
-            .scale(yScale)
+            .scale(yScale);
 
         this.xAxis = this.bar_group.append("g")
             .attr("class", "axis xAxis")
@@ -74,11 +66,11 @@ class D3BarChart {
             .attr("class", "axis yAxis")
             .call(yAxis);
 
-        this.xAxis.selectAll(".tick text").style("font-size", "14px").style("opacity", "0.7").attr("transform", "translate(0, -10)")
-        this.xAxis.selectAll(".tick line").style("opacity", "0.3")
+        this.xAxis.selectAll(".tick text").style("font-size", "14px").style("opacity", "0.7").attr("transform", "translate(0, -10)");
+        this.xAxis.selectAll(".tick line").style("opacity", "0.3");
 
-        this.yAxis.selectAll(".tick text").style("font-size", "16px").style("opacity", "0.7")
-        this.yAxis.selectAll(".tick line").attr("stroke", "transparent")
+        this.yAxis.selectAll(".tick text").style("font-size", "16px").style("opacity", "0.7");
+        this.yAxis.selectAll(".tick line").attr("stroke", "transparent");
         
         this.bars = this.bar_group.selectAll("rect")
             .data(data)
@@ -96,21 +88,20 @@ class D3BarChart {
     getYScale(data, key) {
         let y_categories = [];
         for (let i = 0; i < data.length; i++)
-            y_categories.push(data[i][key])
+            y_categories.push(data[i][key]);
 
         let yScale = d3.scalePoint()
             .range([this.bar_container_width / 2, this.bars_container_height - this.bar_container_width / 2])
-            .domain(y_categories)
-        return yScale
+            .domain(y_categories);
+        return yScale;
     }
 
     getWidthScale(data) {
-        let max = Math.max.apply(Math, data.map(function (o) { return o.value; }))
+        let max = Math.max.apply(Math, data.map(function (o) { return o.value; }));
 
         let widthScale = d3.scaleLinear()
             .domain([0, max])
             .range([0, this.width - (this.margins[0] + this.margins[1])]);
-        
         return widthScale;
     }
 
@@ -120,19 +111,21 @@ class D3BarChart {
         return filteredData;
     }
 
-    hide_bar_chart() {
+    transitionToStartPosition() {
         d3.select("#" + this.id).select("svg").selectAll("rect")
             .transition()
             .duration(0)
-            .attr("width", 0) 
-            
+            .attr("width", 0);
         d3.select("#" + this.id).select("svg").selectAll(".axis")
             .transition()
             .duration(0)
             .style("opacity", 0);
     }
 
-    bindEvents() {
-        d3.select(window).on("resize", this.resize_func)
+    resize() {
+        this.width = parseInt(d3.select("#" + this.id).style("width"));
+        this.height = this.width * this.chartRatio;
+        d3.select("#" + this.id).select("svg").attr("width", this.width);
+        d3.select("#" + this.id).select("svg").attr("height", this.height);
     }
 }

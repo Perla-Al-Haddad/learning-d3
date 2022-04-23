@@ -1,0 +1,1092 @@
+{
+    "data": [
+        {
+            "iso": "BHR",
+            "country": "Bahrain",
+            "year": 2011,
+            "value": 60547421203.8745,
+            "rank": 10.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "BHR",
+            "country": "Bahrain",
+            "year": 2012,
+            "value": 65870814194.8814,
+            "rank": 10.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "BHR",
+            "country": "Bahrain",
+            "year": 2013,
+            "value": 67744917845.0095,
+            "rank": 10.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "BHR",
+            "country": "Bahrain",
+            "year": 2014,
+            "value": 68275104006.2036,
+            "rank": 11.0,
+            "rankprogress": -1
+        },
+        {
+            "iso": "BHR",
+            "country": "Bahrain",
+            "year": 2015,
+            "value": 62533587333.7099,
+            "rank": 11.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "BHR",
+            "country": "Bahrain",
+            "year": 2016,
+            "value": 64221096461.7621,
+            "rank": 11.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "BHR",
+            "country": "Bahrain",
+            "year": 2017,
+            "value": 71281868239.0907,
+            "rank": 12.0,
+            "rankprogress": -1
+        },
+        {
+            "iso": "BHR",
+            "country": "Bahrain",
+            "year": 2018,
+            "value": 67894105059.9718,
+            "rank": 12.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "BHR",
+            "country": "Bahrain",
+            "year": 2019,
+            "value": 74852119909.7613,
+            "rank": 12.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "BHR",
+            "country": "Bahrain",
+            "year": 2020,
+            "value": 73871715036.7985,
+            "rank": 11.0,
+            "rankprogress": 1
+        },
+        {
+            "iso": "EGY",
+            "country": "Egypt",
+            "year": 2011,
+            "value": 905520329095.677,
+            "rank": 2.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "EGY",
+            "country": "Egypt",
+            "year": 2012,
+            "value": 1012411525178.69,
+            "rank": 2.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "EGY",
+            "country": "Egypt",
+            "year": 2013,
+            "value": 1069660604881.77,
+            "rank": 2.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "EGY",
+            "country": "Egypt",
+            "year": 2014,
+            "value": 1068848663582.46,
+            "rank": 2.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "EGY",
+            "country": "Egypt",
+            "year": 2015,
+            "value": 1120773070331.74,
+            "rank": 2.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "EGY",
+            "country": "Egypt",
+            "year": 2016,
+            "value": 1169780132896.07,
+            "rank": 2.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "EGY",
+            "country": "Egypt",
+            "year": 2017,
+            "value": 1263418659550.51,
+            "rank": 2.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "EGY",
+            "country": "Egypt",
+            "year": 2018,
+            "value": 1212767325415.69,
+            "rank": 2.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "EGY",
+            "country": "Egypt",
+            "year": 2019,
+            "value": 1335397302801.68,
+            "rank": 2.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "EGY",
+            "country": "Egypt",
+            "year": 2020,
+            "value": 1634483927646.19,
+            "rank": 1.0,
+            "rankprogress": 1
+        },
+        {
+            "iso": "IRQ",
+            "country": "Iraq",
+            "year": 2011,
+            "value": 366210942347.961,
+            "rank": 4.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "IRQ",
+            "country": "Iraq",
+            "year": 2012,
+            "value": 412398176009.394,
+            "rank": 4.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "IRQ",
+            "country": "Iraq",
+            "year": 2013,
+            "value": 454703937691.199,
+            "rank": 4.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "IRQ",
+            "country": "Iraq",
+            "year": 2014,
+            "value": 416675064800.772,
+            "rank": 4.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "IRQ",
+            "country": "Iraq",
+            "year": 2015,
+            "value": 326975640374.329,
+            "rank": 4.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "IRQ",
+            "country": "Iraq",
+            "year": 2016,
+            "value": 326989680956.211,
+            "rank": 4.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "IRQ",
+            "country": "Iraq",
+            "year": 2017,
+            "value": 368303405280.492,
+            "rank": 4.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "IRQ",
+            "country": "Iraq",
+            "year": 2018,
+            "value": 410981898773.253,
+            "rank": 4.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "IRQ",
+            "country": "Iraq",
+            "year": 2019,
+            "value": 438338891459.844,
+            "rank": 4.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "IRQ",
+            "country": "Iraq",
+            "year": 2020,
+            "value": 401663254150.299,
+            "rank": 4.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "JOR",
+            "country": "Jordan",
+            "year": 2011,
+            "value": 70465432945.1075,
+            "rank": 9.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "JOR",
+            "country": "Jordan",
+            "year": 2012,
+            "value": 73197505917.5966,
+            "rank": 9.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "JOR",
+            "country": "Jordan",
+            "year": 2013,
+            "value": 78639782568.0257,
+            "rank": 9.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "JOR",
+            "country": "Jordan",
+            "year": 2014,
+            "value": 80567140870.3504,
+            "rank": 10.0,
+            "rankprogress": -1
+        },
+        {
+            "iso": "JOR",
+            "country": "Jordan",
+            "year": 2015,
+            "value": 86434159339.6079,
+            "rank": 10.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "JOR",
+            "country": "Jordan",
+            "year": 2016,
+            "value": 88477211477.9348,
+            "rank": 10.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "JOR",
+            "country": "Jordan",
+            "year": 2017,
+            "value": 96610474922.4415,
+            "rank": 11.0,
+            "rankprogress": -1
+        },
+        {
+            "iso": "JOR",
+            "country": "Jordan",
+            "year": 2018,
+            "value": 87749155312.1707,
+            "rank": 11.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "JOR",
+            "country": "Jordan",
+            "year": 2019,
+            "value": 96518796214.5447,
+            "rank": 11.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "JOR",
+            "country": "Jordan",
+            "year": 2020,
+            "value": 105389339050.9,
+            "rank": 10.0,
+            "rankprogress": 1
+        },
+        {
+            "iso": "KWT",
+            "country": "Kuwait",
+            "year": 2011,
+            "value": 247590972271.678,
+            "rank": 6.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "KWT",
+            "country": "Kuwait",
+            "year": 2012,
+            "value": 276883882505.7,
+            "rank": 6.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "KWT",
+            "country": "Kuwait",
+            "year": 2013,
+            "value": 276813146170.266,
+            "rank": 6.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "KWT",
+            "country": "Kuwait",
+            "year": 2014,
+            "value": 258670347670.954,
+            "rank": 6.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "KWT",
+            "country": "Kuwait",
+            "year": 2015,
+            "value": 181157570928.792,
+            "rank": 7.0,
+            "rankprogress": -1
+        },
+        {
+            "iso": "KWT",
+            "country": "Kuwait",
+            "year": 2016,
+            "value": 176814121172.887,
+            "rank": 8.0,
+            "rankprogress": -1
+        },
+        {
+            "iso": "KWT",
+            "country": "Kuwait",
+            "year": 2017,
+            "value": 206275309665.556,
+            "rank": 7.0,
+            "rankprogress": 1
+        },
+        {
+            "iso": "KWT",
+            "country": "Kuwait",
+            "year": 2018,
+            "value": 216510192127.686,
+            "rank": 7.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "KWT",
+            "country": "Kuwait",
+            "year": 2019,
+            "value": 216024138968.138,
+            "rank": 7.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "KWT",
+            "country": "Kuwait",
+            "year": 2020,
+            "value": 180563182704.298,
+            "rank": 7.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "LBN",
+            "country": "Lebanon",
+            "year": 2011,
+            "value": "-",
+            "rank": "-",
+            "rankprogress": 0
+        },
+        {
+            "iso": "LBN",
+            "country": "Lebanon",
+            "year": 2012,
+            "value": "-",
+            "rank": "-",
+            "rankprogress": 0
+        },
+        {
+            "iso": "LBN",
+            "country": "Lebanon",
+            "year": 2013,
+            "value": "-",
+            "rank": "-",
+            "rankprogress": 0
+        },
+        {
+            "iso": "LBN",
+            "country": "Lebanon",
+            "year": 2014,
+            "value": "-",
+            "rank": "-",
+            "rankprogress": 0
+        },
+        {
+            "iso": "LBN",
+            "country": "Lebanon",
+            "year": 2015,
+            "value": "-",
+            "rank": "-",
+            "rankprogress": 0
+        },
+        {
+            "iso": "LBN",
+            "country": "Lebanon",
+            "year": 2016,
+            "value": "-",
+            "rank": "-",
+            "rankprogress": 0
+        },
+        {
+            "iso": "LBN",
+            "country": "Lebanon",
+            "year": 2017,
+            "value": 133294513486.612,
+            "rank": 10.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "LBN",
+            "country": "Lebanon",
+            "year": 2018,
+            "value": 124798484192.574,
+            "rank": 10.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "LBN",
+            "country": "Lebanon",
+            "year": 2019,
+            "value": 122552161181.175,
+            "rank": 10.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "LBN",
+            "country": "Lebanon",
+            "year": 2020,
+            "value": "-",
+            "rank": "-",
+            "rankprogress": 0
+        },
+        {
+            "iso": "MAR",
+            "country": "Morocco",
+            "year": 2011,
+            "value": "-",
+            "rank": "-",
+            "rankprogress": 0
+        },
+        {
+            "iso": "MAR",
+            "country": "Morocco",
+            "year": 2012,
+            "value": "-",
+            "rank": "-",
+            "rankprogress": 0
+        },
+        {
+            "iso": "MAR",
+            "country": "Morocco",
+            "year": 2013,
+            "value": "-",
+            "rank": "-",
+            "rankprogress": 0
+        },
+        {
+            "iso": "MAR",
+            "country": "Morocco",
+            "year": 2014,
+            "value": 229402176988.587,
+            "rank": 7.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "MAR",
+            "country": "Morocco",
+            "year": 2015,
+            "value": 247206727182.502,
+            "rank": 5.0,
+            "rankprogress": 1
+        },
+        {
+            "iso": "MAR",
+            "country": "Morocco",
+            "year": 2016,
+            "value": 253685404663.654,
+            "rank": 5.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "MAR",
+            "country": "Morocco",
+            "year": 2017,
+            "value": 264288883516.995,
+            "rank": 5.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "MAR",
+            "country": "Morocco",
+            "year": 2018,
+            "value": 229115192891.937,
+            "rank": 6.0,
+            "rankprogress": -1
+        },
+        {
+            "iso": "MAR",
+            "country": "Morocco",
+            "year": 2019,
+            "value": 247376575529.226,
+            "rank": 6.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "MAR",
+            "country": "Morocco",
+            "year": 2020,
+            "value": 253135047472.258,
+            "rank": 5.0,
+            "rankprogress": 1
+        },
+        {
+            "iso": "OMN",
+            "country": "Oman",
+            "year": 2011,
+            "value": 141181285502.316,
+            "rank": 8.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "OMN",
+            "country": "Oman",
+            "year": 2012,
+            "value": 155693485697.66,
+            "rank": 7.0,
+            "rankprogress": 1
+        },
+        {
+            "iso": "OMN",
+            "country": "Oman",
+            "year": 2013,
+            "value": 158418735823.672,
+            "rank": 7.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "OMN",
+            "country": "Oman",
+            "year": 2014,
+            "value": 155551303076.057,
+            "rank": 9.0,
+            "rankprogress": -1
+        },
+        {
+            "iso": "OMN",
+            "country": "Oman",
+            "year": 2015,
+            "value": 132771363005.835,
+            "rank": 9.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "OMN",
+            "country": "Oman",
+            "year": 2016,
+            "value": 129565247030.655,
+            "rank": 9.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "OMN",
+            "country": "Oman",
+            "year": 2017,
+            "value": 135696698275.155,
+            "rank": 9.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "OMN",
+            "country": "Oman",
+            "year": 2018,
+            "value": 139307887569.579,
+            "rank": 9.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "OMN",
+            "country": "Oman",
+            "year": 2019,
+            "value": 141532844819.483,
+            "rank": 9.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "OMN",
+            "country": "Oman",
+            "year": 2020,
+            "value": 147907748557.027,
+            "rank": 9.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "PSE",
+            "country": "Palestine",
+            "year": 2011,
+            "value": 15574275577.5684,
+            "rank": 11.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "PSE",
+            "country": "Palestine",
+            "year": 2012,
+            "value": 18427761706.3305,
+            "rank": 11.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "PSE",
+            "country": "Palestine",
+            "year": 2013,
+            "value": 19276018797.8404,
+            "rank": 11.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "PSE",
+            "country": "Palestine",
+            "year": 2014,
+            "value": 20896013785.3329,
+            "rank": 12.0,
+            "rankprogress": -1
+        },
+        {
+            "iso": "PSE",
+            "country": "Palestine",
+            "year": 2015,
+            "value": 23058096344.0138,
+            "rank": 12.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "PSE",
+            "country": "Palestine",
+            "year": 2016,
+            "value": 23992168122.2744,
+            "rank": 12.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "PSE",
+            "country": "Palestine",
+            "year": 2017,
+            "value": 25641776562.2318,
+            "rank": 13.0,
+            "rankprogress": -1
+        },
+        {
+            "iso": "PSE",
+            "country": "Palestine",
+            "year": 2018,
+            "value": 26796651764.4897,
+            "rank": 13.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "PSE",
+            "country": "Palestine",
+            "year": 2019,
+            "value": 29758350040.2803,
+            "rank": 13.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "PSE",
+            "country": "Palestine",
+            "year": 2020,
+            "value": 30172340479.2631,
+            "rank": 12.0,
+            "rankprogress": 1
+        },
+        {
+            "iso": "QAT",
+            "country": "Qatar",
+            "year": 2011,
+            "value": 283715628943.088,
+            "rank": 5.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "QAT",
+            "country": "Qatar",
+            "year": 2012,
+            "value": 311040938381.942,
+            "rank": 5.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "QAT",
+            "country": "Qatar",
+            "year": 2013,
+            "value": 322984627128.03,
+            "rank": 5.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "QAT",
+            "country": "Qatar",
+            "year": 2014,
+            "value": 317405686306.752,
+            "rank": 5.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "QAT",
+            "country": "Qatar",
+            "year": 2015,
+            "value": 238529393106.102,
+            "rank": 6.0,
+            "rankprogress": -1
+        },
+        {
+            "iso": "QAT",
+            "country": "Qatar",
+            "year": 2016,
+            "value": 220585019150.358,
+            "rank": 6.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "QAT",
+            "country": "Qatar",
+            "year": 2017,
+            "value": 259008198254.249,
+            "rank": 6.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "QAT",
+            "country": "Qatar",
+            "year": 2018,
+            "value": 253501918706.454,
+            "rank": 5.0,
+            "rankprogress": 1
+        },
+        {
+            "iso": "QAT",
+            "country": "Qatar",
+            "year": 2019,
+            "value": 263489035930.732,
+            "rank": 5.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "QAT",
+            "country": "Qatar",
+            "year": 2020,
+            "value": 228000497918.315,
+            "rank": 6.0,
+            "rankprogress": -1
+        },
+        {
+            "iso": "SAU",
+            "country": "Saudi Arabia",
+            "year": 2011,
+            "value": 1586748628693.7,
+            "rank": 1.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "SAU",
+            "country": "Saudi Arabia",
+            "year": 2012,
+            "value": 1672470901909.81,
+            "rank": 1.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "SAU",
+            "country": "Saudi Arabia",
+            "year": 2013,
+            "value": 1680157956801.77,
+            "rank": 1.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "SAU",
+            "country": "Saudi Arabia",
+            "year": 2014,
+            "value": 1722861722274.39,
+            "rank": 1.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "SAU",
+            "country": "Saudi Arabia",
+            "year": 2015,
+            "value": 1541832209161.96,
+            "rank": 1.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "SAU",
+            "country": "Saudi Arabia",
+            "year": 2016,
+            "value": 1475671841184.95,
+            "rank": 1.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "SAU",
+            "country": "Saudi Arabia",
+            "year": 2017,
+            "value": 1565892214373.25,
+            "rank": 1.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "SAU",
+            "country": "Saudi Arabia",
+            "year": 2018,
+            "value": 1496037046508.43,
+            "rank": 1.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "SAU",
+            "country": "Saudi Arabia",
+            "year": 2019,
+            "value": 1545203841855.78,
+            "rank": 1.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "SAU",
+            "country": "Saudi Arabia",
+            "year": 2020,
+            "value": 1346507741158.5,
+            "rank": 2.0,
+            "rankprogress": -1
+        },
+        {
+            "iso": "SDN",
+            "country": "Sudan",
+            "year": 2011,
+            "value": 147913062718.785,
+            "rank": 7.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "SDN",
+            "country": "Sudan",
+            "year": 2012,
+            "value": 135767291569.623,
+            "rank": 8.0,
+            "rankprogress": -1
+        },
+        {
+            "iso": "SDN",
+            "country": "Sudan",
+            "year": 2013,
+            "value": 137785895319.605,
+            "rank": 8.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "SDN",
+            "country": "Sudan",
+            "year": 2014,
+            "value": 170929049065.908,
+            "rank": 8.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "SDN",
+            "country": "Sudan",
+            "year": 2015,
+            "value": 170380291548.01,
+            "rank": 8.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "SDN",
+            "country": "Sudan",
+            "year": 2016,
+            "value": 179463797715.122,
+            "rank": 7.0,
+            "rankprogress": 1
+        },
+        {
+            "iso": "SDN",
+            "country": "Sudan",
+            "year": 2017,
+            "value": 176631504032.291,
+            "rank": 8.0,
+            "rankprogress": -1
+        },
+        {
+            "iso": "SDN",
+            "country": "Sudan",
+            "year": 2018,
+            "value": 175403755983.163,
+            "rank": 8.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "SDN",
+            "country": "Sudan",
+            "year": 2019,
+            "value": 154572551101.626,
+            "rank": 8.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "SDN",
+            "country": "Sudan",
+            "year": 2020,
+            "value": 157871569276.965,
+            "rank": 8.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "ARE",
+            "country": "United Arab Emirates",
+            "year": 2011,
+            "value": 605575110378.6,
+            "rank": 3.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "ARE",
+            "country": "United Arab Emirates",
+            "year": 2012,
+            "value": 631707145358.916,
+            "rank": 3.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "ARE",
+            "country": "United Arab Emirates",
+            "year": 2013,
+            "value": 647295696512.235,
+            "rank": 3.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "ARE",
+            "country": "United Arab Emirates",
+            "year": 2014,
+            "value": 678339456953.15,
+            "rank": 3.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "ARE",
+            "country": "United Arab Emirates",
+            "year": 2015,
+            "value": 601179174690.941,
+            "rank": 3.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "ARE",
+            "country": "United Arab Emirates",
+            "year": 2016,
+            "value": 598811314916.195,
+            "rank": 3.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "ARE",
+            "country": "United Arab Emirates",
+            "year": 2017,
+            "value": 624319087625.313,
+            "rank": 3.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "ARE",
+            "country": "United Arab Emirates",
+            "year": 2018,
+            "value": 642496220767.608,
+            "rank": 3.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "ARE",
+            "country": "United Arab Emirates",
+            "year": 2019,
+            "value": 701625608332.414,
+            "rank": 3.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "ARE",
+            "country": "United Arab Emirates",
+            "year": 2020,
+            "value": 647844920362.944,
+            "rank": 3.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "SYR",
+            "country": "Syria",
+            "year": 2020,
+            "value": 1054086570551.546,
+            "rank": 3.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "DZA",
+            "country": "Algeria",
+            "year": 2020,
+            "value": 1054086570551.546,
+            "rank": 3.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "TUN",
+            "country": "Tunisia",
+            "year": 2020,
+            "value": 54086570551.546,
+            "rank": 3.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "YEM",
+            "country": "Yemen",
+            "year": 2020,
+            "value": 504086570551.546,
+            "rank": 3.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "SOM",
+            "country": "Somalia",
+            "year": 2020,
+            "value": 54086570551.546,
+            "rank": 3.0,
+            "rankprogress": 0
+        },
+        {
+            "iso": "LBY",
+            "country": "Libya",
+            "year": 2020,
+            "value": 54086570551.546,
+            "rank": 3.0,
+            "rankprogress": 0
+        }
+    ]
+}
