@@ -64,8 +64,10 @@ class MapPieTransition {
                 let cur_arc = d3.select("#" + this.chart_id).select("svg").select("#arc_" + countries_ISO[i]);
                 cur_arc
                     .transition()
+                    .duration(0)
+                    .attr("opacity", 1)
+                    .transition()
                     .duration(this.transition_duration)
-                    .attr("display", "block")
                     .style("pointer-events", "")
                     .attrTween('d', function (d) {
                         var i = d3.interpolate(d.startAngle, parseFloat(d3.select(this).attr("orgEndAngle")));
@@ -89,6 +91,8 @@ class MapPieTransition {
                 .transition()
                     .duration(this.transition_duration)
                     .style("opacity", "1");
+            
+            d3.select("#" + this.chart_id).select("svg").select(".mapGroup").transition().duration(200).attr("opacity", 1);
             
             d3.select("#" + this.chart_id).select("svg").selectAll(".country.empty")
                 .transition()
@@ -128,7 +132,7 @@ class MapPieTransition {
                     .style("pointer-events", "none")
                     .transition()
                     .duration(0)
-                    .attr("display", "none");
+                    .attr("opacity", 0);
             }
             
         }) 
@@ -137,10 +141,9 @@ class MapPieTransition {
     startTransition() {
         if (this.cur_option == "pie") {
             d3.select("#" + this.chart_id).select("svg").select(".mapGroup").attr("opacity", 0);
-            // setTimeout(() => { this.map_chart.transtionToBarPosition(this.bar_chart); }, 500)
+            setTimeout(() => { this.map_chart.transitionToPiePosition(this.pie_chart); }, 500)
         } else if (this.cur_option == "map") {
             d3.select("#" + this.chart_id).select("svg").select(".pieGroup").attr("opacity", 0);
-            // setTimeout(() => { this.bar_chart.transitionToStartPosition(); }, 500);
         }
         let timer = this.setTimer();
         this.bindEvents(timer);

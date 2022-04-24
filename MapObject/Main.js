@@ -26,22 +26,21 @@ $(document).ready(function() {
     let map = new D3Map("MapDIV", 0.6, "UN.json", "Ranking_for_GIS_Richness.json");
     let bar = new D3BarChart("BarDIV", 0.6, [175, 50, 50, 25], "Ranking_for_GIS_Richness.json")
 
-    let mbt = new MapBarTransition("MapBarTransitionDIV", 700, 4000, "map", "Ranking_for_GIS_Richness.json");
+    let mbt = new MapBarTransition("MapBarTransitionDIV", 850, 4000, "map", "Ranking_for_GIS_Richness.json");
     mbt.startTransition();
 
     let economyMap = new D3Map("EconomySizeMapDIV", 0.6, "UN.json", "Visualization Economy Size.json");
     let pie = new D3PieChart("PieDIV", 0.6, "Visualization Economy Size.json");
 
-    let mpt = new MapPieTransition("MapPieTransitionDIV", 700, 4000, "map", "Visualization Economy Size.json");
+    let mpt = new MapPieTransition("MapPieTransitionDIV", 850, 4000, "map", "Visualization Economy Size.json");
     mpt.startTransition();
 
+    const mapObjects = [map, bar, mbt, economyMap, pie, mpt];
+
     d3.select(window).on("resize", () => {
-        map.resize();
-        bar.resize();
-        mbt.resize();
-        economyMap.resize();
-        pie.resize();
-        mpt.resize();
+        mapObjects.forEach(element => {
+            element.resize();
+        });
     });
 })
 

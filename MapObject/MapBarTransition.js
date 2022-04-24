@@ -4,9 +4,10 @@ class MapBarTransition {
         this.wait_duration = wait_duration;
         this.cur_option = start_option;
         this.chart_id = chart_id;
+        this.data_file_path = data_file_path;
 
-        this.map_chart = new D3Map(this.chart_id, 0.6, "UN.json", data_file_path);;
-        this.bar_chart = new D3BarChart(this.chart_id, 0.6, [175, 50, 50, 25], data_file_path);
+        this.map_chart = new D3Map(this.chart_id, 0.6, "UN.json", this.data_file_path);;
+        this.bar_chart = new D3BarChart(this.chart_id, 0.6, [175, 50, 50, 25], this.data_file_path);
     }
 
     map_bar_transition() {
@@ -94,7 +95,7 @@ class MapBarTransition {
     startTransition() {
         if (this.cur_option == "bar") {
             d3.select("#" + this.chart_id).select("svg").select(".mapGroup").attr("opacity", 0);
-            setTimeout(() => { this.map_chart.transtionToBarPosition(this.bar_chart); }, 500)
+            setTimeout(() => { this.map_chart.transitionToBarPosition(this.bar_chart); }, 500)
         } else if (this.cur_option == "map") {
             d3.select("#" + this.chart_id).select("svg").select(".barGroup").attr("opacity", 0);
             setTimeout(() => { this.bar_chart.transitionToStartPosition(); }, 500);

@@ -118,7 +118,7 @@ class D3Map {
         return filteredData;
     }
 
-    transtionToBarPosition(barChart) {
+    transitionToBarPosition(barChart) {
         var that = this;
         d3.select("#" + this.id).select("svg").selectAll("path.country:not(.empty)")
             .transition() 
@@ -138,6 +138,31 @@ class D3Map {
                 transform_str += "translate(" + (barChart.margins[0] - this_x) + ", " + (cur_bar_y - this_y) + ") scale(0,0)";
                 return transform_str;
             });
+    }
+    transitionToPiePosition() {
+        let that = this;
+        d3.select("#" + this.id).select("svg").selectAll(".country:not(.empty)")
+            .transition()
+            .duration(1000)
+            .attr("transform-origin", function () {
+                let this_x = getBoundingBoxCenter(this)[0];
+                let this_y = getBoundingBoxCenter(this)[1];
+                return this_x + " " + this_y;
+            })
+            .attr("transform", function () {
+                let transform_str = "";
+                let cur_arc_x = d3.select(this).attr("arc_x");
+                let cur_arc_y = d3.select(this).attr("arc_y");
+                cur_arc_x = parseFloat(cur_arc_x)
+                cur_arc_y = parseFloat(cur_arc_y)
+                cur_arc_x += that.width/2;
+                cur_arc_y += that.height/2;
+                let this_x = getBoundingBoxCenter(this)[0];
+                let this_y = getBoundingBoxCenter(this)[1];
+                transform_str += "translate(" + (cur_arc_x - this_x) + ", " + (cur_arc_y - this_y) + ") scale(0, 0)";
+                return transform_str;
+            })
+            .attr("stroke-width", 0);
     }
 
     getColorScale(data) {
