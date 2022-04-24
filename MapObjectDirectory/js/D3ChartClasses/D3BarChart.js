@@ -1,14 +1,10 @@
-class D3BarChart {
+class D3BarChart extends D3Chart {
     constructor(DOM_ID, chartRatio, margins, data_file_path, barColor) {
-        this.id = DOM_ID;
-        this.chartRatio = chartRatio;
+        super(DOM_ID, chartRatio, data_file_path);
+        
         this.margins = margins;
-        this.data_file_path = data_file_path;
         this.barColor = barColor;
         
-        this.width = parseInt(d3.select("#" + this.id).style("width"));
-        this.height = this.width * this.chartRatio;
-
         this.bars_container_height = this.height - this.margins[2];
 
         this.render();
@@ -124,10 +120,4 @@ class D3BarChart {
             .style("opacity", 0);
     }
 
-    resize() {
-        this.width = parseInt(d3.select("#" + this.id).style("width"));
-        this.height = this.width * this.chartRatio;
-        d3.select("#" + this.id).select("svg").attr("width", this.width);
-        d3.select("#" + this.id).select("svg").attr("height", this.height);
-    }
 }

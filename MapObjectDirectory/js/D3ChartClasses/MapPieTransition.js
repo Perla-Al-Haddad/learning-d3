@@ -1,19 +1,15 @@
-class MapPieTransition {
+class MapPieTransition extends MapChartTransition {
     constructor(chart_id, transition_duration, wait_duration, start_option, data_file_path, colorRange) {
-        this.transition_duration = transition_duration;
-        this.wait_duration = wait_duration;
-        this.cur_option = start_option;
-        this.chart_id = chart_id;
-        this.data_file_path = data_file_path;
-
-        console.log(colorRange)
-        this.map_chart = new D3Map(this.chart_id, 0.6, "data/UN.json", this.data_file_path, colorRange);
-        this.pie_chart = new D3PieChart(this.chart_id, 0.6, this.data_file_path);
+        super(chart_id, transition_duration, wait_duration, start_option, data_file_path, colorRange)
+        this.secondary_chart = new D3PieChart(this.chart_id, 0.6, this.data_file_path);
     }
 
-    map_pie_transition() {
+    /**
+     * @override
+     */
+    map_chart_transition() {
         d3.json(this.data_file_path).then((data) => {
-            let countries_ISO = this.pie_chart.getCountryNames(this.pie_chart.filterData(data), "iso");
+            let countries_ISO = this.secondary_chart.getCountryNames(this.secondary_chart.filterData(data), "iso");
             let that = this;
             d3.select("#" + this.chart_id).select("svg").select(".pieGroup").attr("opacity", 1);
         
@@ -74,18 +70,21 @@ class MapPieTransition {
                         var i = d3.interpolate(d.startAngle, parseFloat(d3.select(this).attr("orgEndAngle")));
                         return function (t) {
                             d.endAngle = i(t);
-                            return that.pie_chart.arc(d);
+                            return that.secondary_chart.arc(d);
                         }
                     }); 
             }
         })
     }
     
-    pie_map_transition() {
+    /**
+     * @override
+     */
+    chart_map_transition() {
         d3.json(this.data_file_path).then((data) => {
             let that = this;
-            let filteredData = this.pie_chart.filterData(data);
-            let countries_ISO = this.pie_chart.getCountryNames(filteredData, "iso");
+            let filteredData = this.secondary_chart.filterData(data);
+            let countries_ISO = this.secondary_chart.getCountryNames(filteredData, "iso");
             let colorScale = this.map_chart.getColorScale(filteredData);
 
             d3.select("#" + this.chart_id).select("svg").selectAll(".border")
@@ -127,7 +126,7 @@ class MapPieTransition {
                         var i = d3.interpolate(d.endAngle, parseFloat(d3.select(this).attr("orgStartAngle")));
                         return function (t) {
                             d.endAngle = i(t);
-                            return that.pie_chart.arc(d);
+                            return that.secondary_chart.arc(d);
                         }
                     })
                     .style("pointer-events", "none")
@@ -139,10 +138,13 @@ class MapPieTransition {
         }) 
     }
 
+    /**
+     * @override
+     */
     startTransition() {
         if (this.cur_option == "pie") {
             d3.select("#" + this.chart_id).select("svg").select(".mapGroup").attr("opacity", 0);
-            setTimeout(() => { this.map_chart.transitionToPiePosition(this.pie_chart); }, 500)
+            setTimeout(() => { this.map_chart.transitionToPiePosition(this.secondary_chart); }, 500)
         } else if (this.cur_option == "map") {
             d3.select("#" + this.chart_id).select("svg").select(".pieGroup").attr("opacity", 0);
         }
@@ -150,29 +152,18 @@ class MapPieTransition {
         this.bindEvents(timer);
     }
 
+    /**
+     * @override
+     */
     setTimer() {
         return setInterval(() => {
             if (this.cur_option == "map") {
                 this.cur_option = "pie";
-                this.map_pie_transition();
+                this.map_chart_transition();
             } else if (this.cur_option == "pie") {
                 this.cur_option = "map";
-                this.pie_map_transition();
+                this.chart_map_transition();
             }
         }, this.wait_duration)
-    }
-
-    bindEvents(timer) {
-        let that = this;
-        $('#' + this.chart_id).hover(function () {
-            clearInterval(timer);
-        }, function () {
-            timer = that.setTimer(); 
-        });
-    }
-
-    resize() {
-        this.map_chart.resize();
-        this.pie_chart.resize();
     }
 }

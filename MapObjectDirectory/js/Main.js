@@ -28,6 +28,8 @@ $(document).ready(function() {
     let purpleRange = ["#f3e0f7","#9f82ce"];
     let yellowRange = ["#f3e79b", "#dd6d75"];
 
+    // let test = new D3Chart("PieDIV", 0.6, "data/Visualization Economy Size.json");
+
     let map = new D3Map("MapDIV", 0.6, "data/UN.json", "data/Ranking_for_GIS_Richness.json", yellowRange);
     let bar = new D3BarChart("BarDIV", 0.6, [175, 50, 50, 25], "data/Ranking_for_GIS_Richness.json", "#fac484")
 

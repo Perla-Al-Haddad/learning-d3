@@ -341,7 +341,7 @@ function fillEconomySizeChart() {
             var timer = setInterval(function () {
                 if (currentOption == "map") {
                     currentOption = "pie"
-                    map_pie_transition(trans_duration, arc)
+                    map_chart_transition(trans_duration, arc)
                 }
                 else if (currentOption == "pie") {
                     currentOption = "map"
@@ -355,7 +355,7 @@ function fillEconomySizeChart() {
                 timer = setInterval(function () {
                     if (currentOption == "map") {
                         currentOption = "pie"
-                        map_pie_transition(trans_duration, arc)
+                        map_chart_transition(trans_duration, arc)
                     }
                     else if (currentOption == "pie") {
                         currentOption = "map"
@@ -391,7 +391,7 @@ function fillEconomySizeChart() {
 
 }
 
-function map_pie_transition(trans_duration, arc_func) {
+function map_chart_transition(trans_duration, arc_func) {
     let countries_ISO = ["ARE", "BHR", "EGY", "IRQ", "JOR", "KWT", "MAR", "OMN", "PSE", "QAT", "SAU", "SDN"];
 
     d3.selectAll(".border")

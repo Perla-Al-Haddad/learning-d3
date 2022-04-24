@@ -1,13 +1,9 @@
-class D3Map {
+class D3Map extends D3Chart {
     constructor(DOM_ID, chartRatio, topojson_file_path, data_file_path, colorRange) {
-        this.id = DOM_ID;
-        this.chartRatio = chartRatio;
-        this.topojson_file_path = topojson_file_path;
-        this.data_file_path = data_file_path;
-        this.colorRange = colorRange;
+        super(DOM_ID, chartRatio, data_file_path);
 
-        this.width = parseInt(d3.select("#" + this.id).style("width"));
-        this.height = this.width * this.chartRatio;
+        this.topojson_file_path = topojson_file_path;
+        this.colorRange = colorRange;
 
         this.projection = d3.geoMercator()
             .translate([this.width / 2, this.height / 2])

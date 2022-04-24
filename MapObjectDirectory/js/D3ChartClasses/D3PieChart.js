@@ -1,11 +1,6 @@
-class D3PieChart {
+class D3PieChart extends D3Chart {
     constructor(DOM_ID, chartRatio, data_file_path) {
-        this.id = DOM_ID;
-        this.chartRatio = chartRatio;
-        this.data_file_path = data_file_path;
-        
-        this.width = parseInt(d3.select("#" + this.id).style("width"));
-        this.height = this.width * this.chartRatio;
+        super(DOM_ID, chartRatio, data_file_path);
 
         this.radius = Math.min(this.width, this.height) / 2;
 
@@ -211,10 +206,4 @@ class D3PieChart {
         return filteredData;
     }
 
-    resize() {
-        this.width = parseInt(d3.select("#" + this.id).style("width"));
-        this.height = this.width * this.chartRatio;
-        d3.select("#" + this.id).select("svg").attr("width", this.width);
-        d3.select("#" + this.id).select("svg").attr("height", this.height);
-    }
 }

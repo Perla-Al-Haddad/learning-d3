@@ -1,16 +1,13 @@
-class MapBarTransition {
+class MapBarTransition extends MapChartTransition {
     constructor(chart_id, transition_duration, wait_duration, start_option, data_file_path, colorRange, barColor) {
-        this.transition_duration = transition_duration;
-        this.wait_duration = wait_duration;
-        this.cur_option = start_option;
-        this.chart_id = chart_id;
-        this.data_file_path = data_file_path;
-
-        this.map_chart = new D3Map(this.chart_id, 0.6, "data/UN.json", this.data_file_path, colorRange);
-        this.bar_chart = new D3BarChart(this.chart_id, 0.6, [175, 50, 50, 25], this.data_file_path, barColor);
+        super(chart_id, transition_duration, wait_duration, start_option, data_file_path, colorRange);
+        this.secondary_chart = new D3BarChart(this.chart_id, 0.6, [175, 50, 50, 25], this.data_file_path, barColor);
     }
 
-    map_bar_transition() {
+    /**
+     * @override
+     */
+    map_chart_transition() {
         let that = this;
         d3.select("#" + this.chart_id).select("svg").select(".barGroup").attr("opacity", 1);
 
@@ -45,7 +42,7 @@ class MapBarTransition {
                 cur_bar_y = Math.floor(cur_bar_y);
                 let this_x = getBoundingBoxCenter(this)[0];
                 let this_y = getBoundingBoxCenter(this)[1];
-                transform_str += "translate(" + (that.bar_chart.margins[0] - this_x) + ", " + (cur_bar_y - this_y) + ") scale(0,0)";
+                transform_str += "translate(" + (that.secondary_chart.margins[0] - this_x) + ", " + (cur_bar_y - this_y) + ") scale(0,0)";
                 return transform_str;
             })
             .attr("stroke-width", 0);
@@ -57,7 +54,10 @@ class MapBarTransition {
             .attr("width", function() { return d3.select(this).attr("orgWidth") } );
     }
 
-    bar_map_transition() {
+    /**
+     * @override
+     */
+    chart_map_transition() {
         let that = this;
         d3.select("#" + this.chart_id).select("svg").selectAll("path.border")
             .transition()
@@ -92,41 +92,33 @@ class MapBarTransition {
             .attr("width", 0 ) 
     }
 
+    /**
+     * @override
+     */
     startTransition() {
         if (this.cur_option == "bar") {
             d3.select("#" + this.chart_id).select("svg").select(".mapGroup").attr("opacity", 0);
-            setTimeout(() => { this.map_chart.transitionToBarPosition(this.bar_chart); }, 500)
+            setTimeout(() => { this.map_chart.transitionToBarPosition(this.secondary_chart); }, 500)
         } else if (this.cur_option == "map") {
             d3.select("#" + this.chart_id).select("svg").select(".barGroup").attr("opacity", 0);
-            setTimeout(() => { this.bar_chart.transitionToStartPosition(); }, 500);
+            setTimeout(() => { this.secondary_chart.transitionToStartPosition(); }, 500);
         }
         let timer = this.setTimer(); 
         this.bindEvents(timer);    
     }
 
+    /**
+     * @override
+     */
     setTimer() {
         return setInterval(() => {
             if (this.cur_option == "map") {
                 this.cur_option = "bar";
-                this.map_bar_transition();
+                this.map_chart_transition();
             } else if (this.cur_option == "bar") {
                 this.cur_option = "map";
-                this.bar_map_transition();
+                this.chart_map_transition();
             }
         }, this.wait_duration);
-    }
-
-    bindEvents(timer) {
-        let that = this;
-        $('#' + this.chart_id).hover(function () {
-            clearInterval(timer);
-        }, function () {
-            timer = that.setTimer(); 
-        });
-    }
-
-    resize() {
-        this.map_chart.resize();
-        this.bar_chart.resize();
     }
 }
