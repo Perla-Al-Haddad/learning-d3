@@ -1,9 +1,10 @@
 class D3BarChart {
-    constructor(DOM_ID, chartRatio, margins, data_file_path) {
+    constructor(DOM_ID, chartRatio, margins, data_file_path, barColor) {
         this.id = DOM_ID;
         this.chartRatio = chartRatio;
         this.margins = margins;
         this.data_file_path = data_file_path;
+        this.barColor = barColor;
         
         this.width = parseInt(d3.select("#" + this.id).style("width"));
         this.height = this.width * this.chartRatio;
@@ -62,6 +63,18 @@ class D3BarChart {
             .call(xAxis)
             .call(g => g.select(".domain").remove());
 
+        this.bars = this.bar_group.selectAll("rect")
+            .data(data)
+            .enter()
+                .append("rect")
+                .attr("class", "bar")
+                .attr("fill", this.barColor)
+                .attr("width", function(d) { return widthScale(d.value); })
+                .attr("orgWidth", function() { return d3.select(this).attr("width") })
+                .attr("height", this.bar_width)
+                .attr("id", function (d) { return "rect_" + d.iso; })
+                .attr("y", function (d, i) { return i * that.bar_container_width + that.gap });
+
         this.yAxis = this.bar_group.append("g")
             .attr("class", "axis yAxis")
             .call(yAxis);
@@ -72,17 +85,6 @@ class D3BarChart {
         this.yAxis.selectAll(".tick text").style("font-size", "16px").style("opacity", "0.7");
         this.yAxis.selectAll(".tick line").attr("stroke", "transparent");
         
-        this.bars = this.bar_group.selectAll("rect")
-            .data(data)
-            .enter()
-                .append("rect")
-                .attr("class", "bar")
-                .attr("fill", "#6772E5")
-                .attr("width", function(d) { return widthScale(d.value); })
-                .attr("orgWidth", function() { return d3.select(this).attr("width") })
-                .attr("height", this.bar_width)
-                .attr("id", function (d) { return "rect_" + d.iso; })
-                .attr("y", function (d, i) { return i * that.bar_container_width + that.gap });
     }
 
     getYScale(data, key) {

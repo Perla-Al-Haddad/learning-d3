@@ -1,12 +1,13 @@
 class MapPieTransition {
-    constructor(chart_id, transition_duration, wait_duration, start_option, data_file_path) {
+    constructor(chart_id, transition_duration, wait_duration, start_option, data_file_path, colorRange) {
         this.transition_duration = transition_duration;
         this.wait_duration = wait_duration;
         this.cur_option = start_option;
         this.chart_id = chart_id;
         this.data_file_path = data_file_path;
 
-        this.map_chart = new D3Map(this.chart_id, 0.6, "UN.json", this.data_file_path);
+        console.log(colorRange)
+        this.map_chart = new D3Map(this.chart_id, 0.6, "UN.json", this.data_file_path, colorRange);
         this.pie_chart = new D3PieChart(this.chart_id, 0.6, this.data_file_path);
     }
 

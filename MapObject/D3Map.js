@@ -1,9 +1,10 @@
 class D3Map {
-    constructor(DOM_ID, chartRatio, topojson_file_path, data_file_path) {
+    constructor(DOM_ID, chartRatio, topojson_file_path, data_file_path, colorRange) {
         this.id = DOM_ID;
         this.chartRatio = chartRatio;
         this.topojson_file_path = topojson_file_path;
         this.data_file_path = data_file_path;
+        this.colorRange = colorRange;
 
         this.width = parseInt(d3.select("#" + this.id).style("width"));
         this.height = this.width * this.chartRatio;
@@ -171,8 +172,7 @@ class D3Map {
 
         let colorScale = d3.scaleLinear()
             .domain([min, max])
-            .range(['#d9dcff', "#6772e5"]);
-        
+            .range(this.colorRange);
         return colorScale;
     }
  
