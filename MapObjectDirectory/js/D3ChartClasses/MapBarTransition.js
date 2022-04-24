@@ -6,7 +6,7 @@ class MapBarTransition {
         this.chart_id = chart_id;
         this.data_file_path = data_file_path;
 
-        this.map_chart = new D3Map(this.chart_id, 0.6, "UN.json", this.data_file_path, colorRange);
+        this.map_chart = new D3Map(this.chart_id, 0.6, "data/UN.json", this.data_file_path, colorRange);
         this.bar_chart = new D3BarChart(this.chart_id, 0.6, [175, 50, 50, 25], this.data_file_path, barColor);
     }
 

@@ -7,7 +7,7 @@ class MapPieTransition {
         this.data_file_path = data_file_path;
 
         console.log(colorRange)
-        this.map_chart = new D3Map(this.chart_id, 0.6, "UN.json", this.data_file_path, colorRange);
+        this.map_chart = new D3Map(this.chart_id, 0.6, "data/UN.json", this.data_file_path, colorRange);
         this.pie_chart = new D3PieChart(this.chart_id, 0.6, this.data_file_path);
     }
 
