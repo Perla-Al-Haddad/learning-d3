@@ -10,10 +10,10 @@ function GetSortOrder(prop) {
 }
 
 function distance(x1, y1, x2, y2) {
-    return Math.hypot(x2-x1, y2-y1);
+    return Math.hypot(x2 - x1, y2 - y1);
 }
-function midAngle(d){
-    return d.startAngle + (d.endAngle - d.startAngle)/2;
+function midAngle(d) {
+    return d.startAngle + (d.endAngle - d.startAngle) / 2;
 }
 
 function getBoundingBoxCenter(selection) {
@@ -22,24 +22,22 @@ function getBoundingBoxCenter(selection) {
 }
 
 
-$(document).ready(function() {
-    let blueRange = ["#d9dcff", "#6772e5"];
-    let secondaryBlurRange = [ "#E3F2FD", "#2196F3"];
-    let purpleRange = ["#f3e0f7","#9f82ce"];
-    let yellowRange = ["#f3e79b", "#dd6d75"];
+$(document).ready(function () {
 
-    // let test = new D3Chart("PieDIV", 0.6, "data/Visualization Economy Size.json");
+    let map = new D3Map("MapDIV", D3ChartSettings.getInstance().chartRatio, D3ChartSettings.getInstance().escwaRegionMapTopoJSON_path,
+        "data/Ranking_for_GIS_Richness.json", D3ChartSettings.getInstance().yellowRange);
+    let bar = new D3BarChart("BarDIV", D3ChartSettings.getInstance().chartRatio, [175, 50, 50, 25], "data/Ranking_for_GIS_Richness.json", "#fac484")
 
-    let map = new D3Map("MapDIV", 0.6, "data/UN.json", "data/Ranking_for_GIS_Richness.json", yellowRange);
-    let bar = new D3BarChart("BarDIV", 0.6, [175, 50, 50, 25], "data/Ranking_for_GIS_Richness.json", "#fac484")
-
-    let mbt = new MapBarTransition("MapBarTransitionDIV", 850, 4000, "map", "data/Ranking_for_GIS_Richness.json", blueRange, "#848deb");
+    let mbt = new MapBarTransition("MapBarTransitionDIV", 850, 4000, "map", "data/Ranking_for_GIS_Richness.json", 
+        D3ChartSettings.getInstance().blueRange, "#848deb", D3ChartSettings.getInstance().escwaRegionMapTopoJSON_path);
     mbt.startTransition();
 
-    let economyMap = new D3Map("EconomySizeMapDIV", 0.6, "data/UN.json", "data/Visualization Economy Size.json", purpleRange);
-    let pie = new D3PieChart("PieDIV", 0.6, "data/Visualization Economy Size.json");
+    let economyMap = new D3Map("EconomySizeMapDIV", 1.25, D3ChartSettings.getInstance().escwaRegionMapTopoJSON_path,
+        "data/Visualization Economy Size.json", D3ChartSettings.getInstance().purpleRange);
+    let pie = new D3PieChart("PieDIV", D3ChartSettings.getInstance().chartRatio, "data/Visualization Economy Size.json");
 
-    let mpt = new MapPieTransition("MapPieTransitionDIV", 850, 4000, "map", "data/Visualization Economy Size.json", yellowRange);
+    let mpt = new MapPieTransition("MapPieTransitionDIV", 850, 4000, "map", "data/Visualization Economy Size.json", 
+        D3ChartSettings.getInstance().yellowRange, D3ChartSettings.getInstance().escwaRegionMapTopoJSON_path);
     mpt.startTransition();
 
     const mapObjects = [map, bar, mbt, economyMap, pie, mpt];

@@ -8,7 +8,7 @@ class D3Map extends D3Chart {
         this.projection = d3.geoMercator()
             .translate([this.width / 2, this.height / 2])
             .scale(this.width / 1.8)
-            .center([20, 15]);
+            .center(D3ChartSettings.getInstance().escwaRegionCenterCoords);
         this.path = d3.geoPath().projection(this.projection);
 
         this.render();

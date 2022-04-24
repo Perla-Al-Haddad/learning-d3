@@ -3,7 +3,7 @@
  * 
  */
 class MapChartTransition {
-    constructor(chart_id, transition_duration, wait_duration, start_option, data_file_path, colorRange) {
+    constructor(chart_id, transition_duration, wait_duration, start_option, data_file_path, colorRange, topojson_file_path) {
         if (this.constructor == MapChartTransition) {
             throw new Error("Abstract classes can't be instantiated.");
         }
@@ -13,11 +13,11 @@ class MapChartTransition {
         this.cur_option = start_option;
         this.chart_id = chart_id;
         this.data_file_path = data_file_path;
-        
+
         this.secondary_chart = null;
-        this.map_chart = new D3Map(this.chart_id, 0.6, "data/UN.json", this.data_file_path, colorRange);
+        this.map_chart = new D3Map(this.chart_id, D3ChartSettings.getInstance().chartRatio, topojson_file_path, this.data_file_path, colorRange);
     }
-    
+
     /**
      * @abstract @method
      * @required
@@ -59,7 +59,7 @@ class MapChartTransition {
         $('#' + this.chart_id).hover(function () {
             clearInterval(timer);
         }, function () {
-            timer = that.setTimer(); 
+            timer = that.setTimer();
         });
     }
 

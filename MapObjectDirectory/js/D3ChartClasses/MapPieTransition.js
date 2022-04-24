@@ -1,6 +1,6 @@
 class MapPieTransition extends MapChartTransition {
-    constructor(chart_id, transition_duration, wait_duration, start_option, data_file_path, colorRange) {
-        super(chart_id, transition_duration, wait_duration, start_option, data_file_path, colorRange)
+    constructor(chart_id, transition_duration, wait_duration, start_option, data_file_path, colorRange, topojson_file_path) {
+        super(chart_id, transition_duration, wait_duration, start_option, data_file_path, colorRange, topojson_file_path);
         this.secondary_chart = new D3PieChart(this.chart_id, 0.6, this.data_file_path);
     }
 
@@ -12,12 +12,12 @@ class MapPieTransition extends MapChartTransition {
             let countries_ISO = this.secondary_chart.getCountryNames(this.secondary_chart.filterData(data), "iso");
             let that = this;
             d3.select("#" + this.chart_id).select("svg").select(".pieGroup").attr("opacity", 1);
-        
+
             d3.select("#" + this.chart_id).select("svg").selectAll(".border")
                 .transition()
-                    .duration(this.transition_duration)
-                    .style("opacity", "0");
-                    
+                .duration(this.transition_duration)
+                .style("opacity", "0");
+
             d3.select("#" + this.chart_id).select("svg").selectAll(".country:not(.empty)")
                 .transition()
                 .duration(this.transition_duration)
@@ -32,20 +32,20 @@ class MapPieTransition extends MapChartTransition {
                     let cur_arc_y = d3.select(this).attr("arc_y");
                     cur_arc_x = parseFloat(cur_arc_x)
                     cur_arc_y = parseFloat(cur_arc_y)
-                    cur_arc_x += that.map_chart.width/2;
-                    cur_arc_y += that.map_chart.height/2;
+                    cur_arc_x += that.map_chart.width / 2;
+                    cur_arc_y += that.map_chart.height / 2;
                     let this_x = getBoundingBoxCenter(this)[0];
                     let this_y = getBoundingBoxCenter(this)[1];
                     transform_str += "translate(" + (cur_arc_x - this_x) + ", " + (cur_arc_y - this_y) + ") scale(0, 0)";
                     return transform_str;
                 })
                 .attr("stroke-width", 0);
-            
+
             d3.select("#" + this.chart_id).select("svg").selectAll(".country.empty")
                 .transition()
-                    .duration(this.transition_duration)
-                    .style("display", "none")
-                    .style("pointer-events", "none");
+                .duration(this.transition_duration)
+                .style("display", "none")
+                .style("pointer-events", "none");
 
             d3.select("#" + this.chart_id).select("svg").select(".labels").selectAll("text")
                 .transition()
@@ -56,7 +56,7 @@ class MapPieTransition extends MapChartTransition {
                 .transition()
                 .duration(this.transition_duration)
                 .attr("opacity", 1);
-                
+
             for (let i = 0; i < countries_ISO.length; i++) {
                 let cur_arc = d3.select("#" + this.chart_id).select("svg").select("#arc_" + countries_ISO[i]);
                 cur_arc
@@ -72,11 +72,11 @@ class MapPieTransition extends MapChartTransition {
                             d.endAngle = i(t);
                             return that.secondary_chart.arc(d);
                         }
-                    }); 
+                    });
             }
         })
     }
-    
+
     /**
      * @override
      */
@@ -89,34 +89,34 @@ class MapPieTransition extends MapChartTransition {
 
             d3.select("#" + this.chart_id).select("svg").selectAll(".border")
                 .transition()
-                    .duration(this.transition_duration)
-                    .style("opacity", "1");
-            
+                .duration(this.transition_duration)
+                .style("opacity", "1");
+
             d3.select("#" + this.chart_id).select("svg").select(".mapGroup").transition().duration(200).attr("opacity", 1);
-            
+
             d3.select("#" + this.chart_id).select("svg").selectAll(".country.empty")
                 .transition()
-                    .duration(this.transition_duration)
-                    .style("display", "block")
-                    .style("pointer-events", "");
-        
+                .duration(this.transition_duration)
+                .style("display", "block")
+                .style("pointer-events", "");
+
             d3.select("#" + this.chart_id).select("svg").selectAll(".country:not(.empty)")
                 .transition()
-                    .duration(this.transition_duration)
-                    .attr("transform", "")
-                    .style("fill", function (d) { return ((d.properties.value != undefined) ? colorScale(d.properties.value) : "white") })
-                    .attr("stroke-width", 0.5);
-        
+                .duration(this.transition_duration)
+                .attr("transform", "")
+                .style("fill", function (d) { return ((d.properties.value != undefined) ? colorScale(d.properties.value) : "white") })
+                .attr("stroke-width", 0.5);
+
             d3.select("#" + this.chart_id).select("svg").select(".labels").selectAll("text")
                 .transition()
                 .duration(this.transition_duration)
                 .attr("opacity", 0);
-        
+
             d3.select("#" + this.chart_id).select("svg").select(".lines").selectAll("polyline")
                 .transition()
                 .duration(this.transition_duration)
                 .attr("opacity", 0);
-        
+
             for (let i = 0; i < countries_ISO.length; i++) {
                 let cur_arc = d3.select("#" + this.chart_id).select("svg").select("#arc_" + countries_ISO[i]);
                 cur_arc
@@ -134,8 +134,8 @@ class MapPieTransition extends MapChartTransition {
                     .duration(0)
                     .attr("opacity", 0);
             }
-            
-        }) 
+
+        })
     }
 
     /**

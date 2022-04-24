@@ -1,6 +1,6 @@
 class MapBarTransition extends MapChartTransition {
-    constructor(chart_id, transition_duration, wait_duration, start_option, data_file_path, colorRange, barColor) {
-        super(chart_id, transition_duration, wait_duration, start_option, data_file_path, colorRange);
+    constructor(chart_id, transition_duration, wait_duration, start_option, data_file_path, colorRange, barColor, topojson_file_path) {
+        super(chart_id, transition_duration, wait_duration, start_option, data_file_path, colorRange, topojson_file_path);
         this.secondary_chart = new D3BarChart(this.chart_id, 0.6, [175, 50, 50, 25], this.data_file_path, barColor);
     }
 
