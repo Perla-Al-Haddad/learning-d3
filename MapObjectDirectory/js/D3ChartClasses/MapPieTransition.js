@@ -11,7 +11,11 @@ class MapPieTransition extends MapChartTransition {
         d3.json(this.data_file_path).then((data) => {
             let countries_ISO = this.secondary_chart.getCountryNames(this.secondary_chart.filterData(data), "iso");
             let that = this;
-            d3.select("#" + this.chart_id).select("svg").select(".pieGroup").attr("opacity", 1);
+            d3.select("#" + this.chart_id).select("svg").select(".pieGroup")
+                .transition()
+                .duration(100)
+                .delay(this.transition_duration)
+                .attr("opacity", 1);
 
             d3.select("#" + this.chart_id).select("svg").selectAll(".border")
                 .transition()
@@ -61,6 +65,7 @@ class MapPieTransition extends MapChartTransition {
                 let cur_arc = d3.select("#" + this.chart_id).select("svg").select("#arc_" + countries_ISO[i]);
                 cur_arc
                     .transition()
+                    .delay(this.transition_duration)
                     .duration(0)
                     .attr("opacity", 1)
                     .transition()
@@ -102,6 +107,7 @@ class MapPieTransition extends MapChartTransition {
 
             d3.select("#" + this.chart_id).select("svg").selectAll(".country:not(.empty)")
                 .transition()
+                .delay(this.transition_duration)
                 .duration(this.transition_duration)
                 .attr("transform", "")
                 .style("fill", function (d) { return ((d.properties.value != undefined) ? colorScale(d.properties.value) : "white") })
