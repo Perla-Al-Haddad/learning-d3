@@ -36,6 +36,22 @@ let country = "sau";
 
 $(document).ready(function () {
 
+    /**
+     * TODO:
+     * 
+     *      * Add ability to specify colors for pie chart. (linear/ordinal scales)
+     *      * Add Toolboxes for all charts
+     *      * Improve D3SDGWheelChart class
+     *          * Create D3GaugeChart class
+     *          * General improvements (remove hard coded values, better function names...)
+     *      * Document all classes
+     *      * Add current country variable to singelton class instead of leaving it as a global
+     *      * Add utility functions to singelton class 
+     *      * Fix data_file_path parameter name to include api url data sources
+     *      * look into adding facotry method design pattern for chart classes
+     *      * Do more research on builder design pattern
+     */
+
     let map = new D3Map("MapDIV", D3ChartSettings.getInstance().chartRatio, D3ChartSettings.getInstance().escwaRegionMapTopoJSON_path,
         "data/Ranking_for_GIS_Richness.json", D3ChartSettings.getInstance().yellowRange);
     let bar = new D3BarChart("BarDIV", D3ChartSettings.getInstance().chartRatio, [175, 50, 50, 25], "data/Ranking_for_GIS_Richness.json", "#fac484")
@@ -54,10 +70,10 @@ $(document).ready(function () {
 
     let SDGWheelChart = new D3SDGWheelChart("SDGWheelDIV", 0.75, "https://visor.unescwa.org/dbs/ArabSDG/ByCountry/", ["#ADB5BD", "#cc476f", "#f5be58", "#06b27d"]);
 
-    const mapObjects = [map, bar, mbt, economyMap, pie, mpt, SDGWheelChart];
+    const chartObjects = [map, bar, mbt, economyMap, pie, mpt, SDGWheelChart];
 
     d3.select(window).on("resize", () => {
-        mapObjects.forEach(element => {
+        chartObjects.forEach(element => {
             element.resize();
         });
     });
