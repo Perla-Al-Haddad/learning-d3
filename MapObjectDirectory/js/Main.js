@@ -50,6 +50,7 @@ $(document).ready(function () {
      *      * Fix data_file_path parameter name to include api url data sources
      *      * look into adding facotry method design pattern for chart classes
      *      * Do more research on builder design pattern
+     *      * Remove chart related css in index (try to keep chart classes independant from css files)
      */
 
     let map = new D3Map("MapDIV", D3ChartSettings.getInstance().chartRatio, D3ChartSettings.getInstance().escwaRegionMapTopoJSON_path,
