@@ -53,11 +53,13 @@ class MapPieTransition extends MapChartTransition {
 
             d3.select("#" + this.chart_id).select("svg").select(".labels").selectAll("text")
                 .transition()
+                .delay(this.transition_duration)
                 .duration(this.transition_duration)
                 .attr("opacity", 1);
 
             d3.select("#" + this.chart_id).select("svg").select(".lines").selectAll("polyline")
                 .transition()
+                .delay(this.transition_duration)
                 .duration(this.transition_duration)
                 .attr("opacity", 1);
 
