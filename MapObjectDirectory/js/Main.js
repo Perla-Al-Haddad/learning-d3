@@ -42,7 +42,7 @@ $(document).ready(function () {
 
     let mbt = new MapBarTransition("MapBarTransitionDIV", 850, 4000, "map", "data/Ranking_for_GIS_Richness.json", 
         D3ChartSettings.getInstance().blueRange, "#848deb", D3ChartSettings.getInstance().escwaRegionMapTopoJSON_path);
-    // mbt.startTransition();
+    mbt.startTransition();
 
     let economyMap = new D3Map("EconomySizeMapDIV", 1.25, D3ChartSettings.getInstance().escwaRegionMapTopoJSON_path,
         "data/Visualization Economy Size.json", D3ChartSettings.getInstance().purpleRange);
@@ -50,7 +50,7 @@ $(document).ready(function () {
 
     let mpt = new MapPieTransition("MapPieTransitionDIV", 850, 4000, "map", "data/Visualization Economy Size.json", 
         D3ChartSettings.getInstance().yellowRange, D3ChartSettings.getInstance().escwaRegionMapTopoJSON_path);
-    // mpt.startTransition();
+    mpt.startTransition();
 
     let SDGWheelChart = new D3SDGWheelChart("SDGWheelDIV", 0.75, "https://visor.unescwa.org/dbs/ArabSDG/ByCountry/", ["#ADB5BD", "#cc476f", "#f5be58", "#06b27d"]);
 

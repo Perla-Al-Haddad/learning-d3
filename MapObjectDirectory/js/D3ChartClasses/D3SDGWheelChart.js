@@ -62,7 +62,7 @@ class D3SDGWheelChart extends D3Chart {
                 goal_index = parseInt(e.target.getAttribute("name"));
             let finalcoloravg = data["response"][goal_index]["finalcoloravg"];
             let goalName = data["response"][goal_index].name.split(": ")[1];
-            d3.select("#Goal_Name").text(goalName)
+            that.gaugeGroup.select("#Goal_Name").text(goalName)
             that.updateNeedleWrapper(finalcoloravg);
         })
     }
@@ -107,7 +107,7 @@ class D3SDGWheelChart extends D3Chart {
                 .transition()
                 .duration(200)
                 .attr('opacity', '.7');
-        })
+            })
             .on('mouseout', function () {
                 d3.select(this)
                     .transition()
@@ -131,6 +131,11 @@ class D3SDGWheelChart extends D3Chart {
                 return "translate(" + (that.arc.centroid(d)[0] - (that.radius * that.logoOffset) / 2)
                     + "," + (that.arc.centroid(d)[1] - (that.radius * that.logoOffset) / 2) + ")";
             });
+
+        this.wheelGroup.select(".arc")
+            .transition()
+            .duration(100)
+            .attr('transform', function (d) { return 'translate(' + that.arc.centroid(d)[0] / 20 + ',' + that.arc.centroid(d)[1] / 20 + ')'; });
     }
 
     renderGaugeChart() {
