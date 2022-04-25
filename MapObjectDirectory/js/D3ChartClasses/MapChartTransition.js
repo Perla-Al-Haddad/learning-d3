@@ -57,7 +57,7 @@ class MapChartTransition {
     bindEvents(timer) {
         let that = this;
         $('#' + this.chart_id).hover(function () {
-            clearInterval(timer);
+            timer.stop();
         }, function () {
             timer = that.setTimer();
         });

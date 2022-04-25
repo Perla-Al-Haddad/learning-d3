@@ -111,7 +111,7 @@ class MapBarTransition extends MapChartTransition {
      * @override
      */
     setTimer() {
-        return setInterval(() => {
+        return d3.interval(() => {
             if (this.cur_option == "map") {
                 this.cur_option = "bar";
                 this.map_chart_transition();
