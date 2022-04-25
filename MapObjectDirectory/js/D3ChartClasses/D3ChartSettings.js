@@ -7,7 +7,7 @@ class D3ChartSettings {
 
     constructor() {
         this.blueRange = ["#d9dcff", "#6772e5"];
-        this.secondaryBlurRange = ["#E3F2FD", "#2196F3"];
+        this.secondaryBlueRange = ["#514ea1", "#6fc6f4"];
         this.purpleRange = ["#f3e0f7", "#9f82ce"];
         this.yellowRange = ["#f3e79b", "#dd6d75"];
 

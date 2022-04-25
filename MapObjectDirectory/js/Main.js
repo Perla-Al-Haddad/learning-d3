@@ -52,6 +52,7 @@ $(document).ready(function () {
      *      * Do more research on builder design pattern
      *      * Remove chart related css in index (try to keep chart classes independant from css files)
      *      * Add zoom option to maps
+     *      * Add pie transition on text hover
      */
 
     let map = new D3Map("MapDIV", D3ChartSettings.getInstance().chartRatio, D3ChartSettings.getInstance().escwaRegionMapTopoJSON_path,
