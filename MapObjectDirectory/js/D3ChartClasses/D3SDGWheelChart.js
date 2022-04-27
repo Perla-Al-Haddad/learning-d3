@@ -5,15 +5,14 @@ class D3SDGWheelChart extends D3Chart {
         this.padding = 80;
         this.radius = (Math.min(this.height, this.width) - this.padding) / 2;
 
-        this.wheelColorScale = d3.scaleOrdinal()
-            .range(D3ChartSettings.getInstance().SDGColors);
+        this.wheelColorScale = d3.scaleOrdinal().range(D3ChartSettings.getInstance().SDGColors);
 
         this.arc = d3.arc()
             .outerRadius(this.radius - this.radius * 0.32)
-            .innerRadius(this.radius);
+            .innerRadius(this.radius)
+            .cornerRadius(7);
 
-        this.pie = d3.pie()
-            .value(function (d) { return d; });
+        this.pie = d3.pie().value(function (d) { return d; });
 
         this.logoOffset = 0.32 * 0.75;
 
