@@ -67,4 +67,8 @@ class MapChartTransition {
         this.map_chart.resize();
         this.secondary_chart.resize();
     }
+
+    addTooltip() {
+        this.secondary_chart.addTooltip();
+    }
 }

@@ -39,7 +39,6 @@ $(document).ready(function () {
     /**
      * TODO:
      * 
-     *      * Add ability to specify colors for pie chart. (linear/ordinal scales)
      *      * Add Toolboxes for all charts
      *      * Improve D3SDGWheelChart class
      *          * Create D3GaugeChart class
@@ -48,7 +47,7 @@ $(document).ready(function () {
      *      * Add current country variable to singelton class instead of leaving it as a global
      *      * Add utility functions to singelton class 
      *      * Fix data_file_path parameter name to include api url data sources
-     *      * look into adding facotry method design pattern for chart classes
+     *      * look into adding factory method design pattern for chart classes
      *      * Do more research on builder design pattern
      *      * Remove chart related css in index (try to keep chart classes independant from css files)
      *      * Add zoom option to maps
@@ -58,18 +57,21 @@ $(document).ready(function () {
     let map = new D3Map("MapDIV", D3ChartSettings.getInstance().chartRatio, D3ChartSettings.getInstance().escwaRegionMapTopoJSON_path,
         "data/Ranking_for_GIS_Richness.json", D3ChartSettings.getInstance().yellowRange);
     let bar = new D3BarChart("BarDIV", D3ChartSettings.getInstance().chartRatio, [175, 50, 50, 25], "data/Ranking_for_GIS_Richness.json", "#fac484")
+    bar.addTooltip();
 
     let mbt = new MapBarTransition("MapBarTransitionDIV", 850, 4000, "map", "data/Ranking_for_GIS_Richness.json", 
         D3ChartSettings.getInstance().blueRange, "#848deb", D3ChartSettings.getInstance().escwaRegionMapTopoJSON_path);
-    mbt.startTransition();
+    // mbt.startTransition();
+    mbt.addTooltip();
 
     let economyMap = new D3Map("EconomySizeMapDIV", 1.25, D3ChartSettings.getInstance().escwaRegionMapTopoJSON_path,
         "data/Visualization Economy Size.json", D3ChartSettings.getInstance().purpleRange);
-    let pie = new D3PieChart("PieDIV", D3ChartSettings.getInstance().chartRatio, "data/Visualization Economy Size.json");
+    let pie = new D3PieChart("PieDIV", D3ChartSettings.getInstance().chartRatio, "data/Visualization Economy Size.json",
+        D3ChartSettings.getInstance().echartsColors);
 
     let mpt = new MapPieTransition("MapPieTransitionDIV", 850, 4000, "map", "data/Visualization Economy Size.json", 
-        D3ChartSettings.getInstance().yellowRange, D3ChartSettings.getInstance().escwaRegionMapTopoJSON_path);
-    mpt.startTransition();
+        D3ChartSettings.getInstance().yellowRange, D3ChartSettings.getInstance().escwaRegionMapTopoJSON_path, D3ChartSettings.getInstance().echartsColors);
+    // mpt.startTransition();
 
     let SDGWheelChart = new D3SDGWheelChart("SDGWheelDIV", 0.75, "https://visor.unescwa.org/dbs/ArabSDG/ByCountry/", ["#ADB5BD", "#cc476f", "#f5be58", "#06b27d"]);
 

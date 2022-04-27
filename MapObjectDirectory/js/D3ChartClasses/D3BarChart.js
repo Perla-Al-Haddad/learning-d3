@@ -59,6 +59,7 @@ class D3BarChart extends D3Chart {
             .call(xAxis)
             .call(g => g.select(".domain").remove());
 
+
         this.bars = this.bar_group.selectAll("rect")
             .data(data)
             .enter()
@@ -69,7 +70,7 @@ class D3BarChart extends D3Chart {
                 .attr("orgWidth", function() { return d3.select(this).attr("width") })
                 .attr("height", this.bar_width)
                 .attr("id", function (d) { return "rect_" + d.iso; })
-                .attr("y", function (d, i) { return i * that.bar_container_width + that.gap });
+                .attr("y", function (d, i) { return i * that.bar_container_width + that.gap })
 
         this.yAxis = this.bar_group.append("g")
             .attr("class", "axis yAxis")
@@ -118,6 +119,48 @@ class D3BarChart extends D3Chart {
             .transition()
             .duration(0)
             .style("opacity", 0);
+    }
+
+    addTooltip() {
+        setTimeout(() => {
+            let that = this;
+            this.Tooltip = d3.select("#" + this.id)
+                .append("div")
+                .style("opacity", 0)
+                .attr("class", "tooltip")
+                .style("background-color", "white")
+                .style("border", "solid")
+                .style("border-color", "transparent")
+                .style("box-shadow", "0 0 4px #c0c2c9")
+                .style("border-width", "1px")
+                .style("border-radius", "5px")
+                .style("position", "absolute")
+                .style("white-space", "nowrap");
+            
+            console.log(d3.select("#" + this.id).selectAll(".bar"));
+            d3.select("#" + this.id).selectAll(".bar").on("mousemove", function (t) {
+                that.Tooltip    
+                    .transition()
+                    .duration(50)
+                    .style("opacity", 1)
+                that.Tooltip.html("<table class='mx-3 my-2'><tr><th>Country</th><td class='px-2' style='text-align: end'>" + t.target.__data__.country + 
+                    "</td></tr><tr><th>" + "Richness</th><td class='px-2' style='text-align: end'>" + t.target.__data__.value + "</td></tr><table>");
+                that.Tooltip
+                    .style("left", (d3.pointer(t)[0] - 20 + parseInt(that.Tooltip.style("width").replace("px", ""))) + "px")
+                    .style("top", (d3.pointer(t)[1]) + "px")
+                    .style("z-index", 10);            
+                })
+                .on("mouseleave", function (t) {
+                    that.Tooltip
+                        .transition()
+                        .duration(50)
+                        .style("opacity", 0)  
+                        .transition()
+                        .duration(0)          
+                        .style("left", "0px")
+                        .style("top", "0px");
+                });
+        }, 500)
     }
 
 }
