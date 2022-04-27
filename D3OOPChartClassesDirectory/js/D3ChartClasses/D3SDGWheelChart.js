@@ -117,7 +117,7 @@ class D3SDGWheelChart extends D3Chart {
         this.arcs.append("svg:image")
             .attr("name", function (d, i) { return i; })
             .attr("xlink:href", function (d, i) {
-                return "SDGTransparentSVGs/sdg-" + (i + 1) + ".svg";
+                return "assets/SDGTransparentSVGs/sdg-" + (i + 1) + ".svg";
             });
 
         this.arcs.select("image")

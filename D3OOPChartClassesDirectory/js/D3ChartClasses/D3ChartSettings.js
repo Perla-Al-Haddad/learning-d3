@@ -18,7 +18,7 @@ class D3ChartSettings {
             "#73c0de", "#3ba272", "#fc8452", "#9a60b4", "#ea7ccc"];
 
         this.escwaRegionCenterCoords = [20, 15];
-        this.escwaRegionMapTopoJSON_path = "data/UN.json";
+        this.escwaRegionMapTopoJSON_path = "assets/data/UN.json";
         this.chartRatio = 0.6;
 
         this.numberOfSDGs = 17;

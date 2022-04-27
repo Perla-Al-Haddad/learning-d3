@@ -55,23 +55,23 @@ $(document).ready(function () {
      */
 
     let map = new D3Map("MapDIV", D3ChartSettings.getInstance().chartRatio, D3ChartSettings.getInstance().escwaRegionMapTopoJSON_path,
-        "data/Ranking_for_GIS_Richness.json", D3ChartSettings.getInstance().yellowRange);
-    let bar = new D3BarChart("BarDIV", D3ChartSettings.getInstance().chartRatio, [175, 50, 50, 25], "data/Ranking_for_GIS_Richness.json", "#fac484")
+        "assets/data/Ranking_for_GIS_Richness.json", D3ChartSettings.getInstance().yellowRange);
+    let bar = new D3BarChart("BarDIV", D3ChartSettings.getInstance().chartRatio, [175, 50, 50, 25], "assets/data/Ranking_for_GIS_Richness.json", "#fac484")
     bar.addTooltip();
 
-    let mbt = new MapBarTransition("MapBarTransitionDIV", 850, 4000, "map", "data/Ranking_for_GIS_Richness.json", 
+    let mbt = new MapBarTransition("MapBarTransitionDIV", 850, 4000, "map", "assets/data/Ranking_for_GIS_Richness.json", 
         D3ChartSettings.getInstance().blueRange, "#848deb", D3ChartSettings.getInstance().escwaRegionMapTopoJSON_path);
-    // mbt.startTransition();
+    mbt.startTransition();
     mbt.addTooltip();
 
     let economyMap = new D3Map("EconomySizeMapDIV", 1.25, D3ChartSettings.getInstance().escwaRegionMapTopoJSON_path,
-        "data/Visualization Economy Size.json", D3ChartSettings.getInstance().purpleRange);
-    let pie = new D3PieChart("PieDIV", D3ChartSettings.getInstance().chartRatio, "data/Visualization Economy Size.json",
+        "assets/data/Visualization Economy Size.json", D3ChartSettings.getInstance().purpleRange);
+    let pie = new D3PieChart("PieDIV", D3ChartSettings.getInstance().chartRatio, "assets/data/Visualization Economy Size.json",
         D3ChartSettings.getInstance().echartsColors);
 
-    let mpt = new MapPieTransition("MapPieTransitionDIV", 850, 4000, "map", "data/Visualization Economy Size.json", 
+    let mpt = new MapPieTransition("MapPieTransitionDIV", 850, 4000, "map", "assets/data/Visualization Economy Size.json", 
         D3ChartSettings.getInstance().yellowRange, D3ChartSettings.getInstance().escwaRegionMapTopoJSON_path, D3ChartSettings.getInstance().echartsColors);
-    // mpt.startTransition();
+    mpt.startTransition();
 
     let SDGWheelChart = new D3SDGWheelChart("SDGWheelDIV", 0.75, "https://visor.unescwa.org/dbs/ArabSDG/ByCountry/", ["#ADB5BD", "#cc476f", "#f5be58", "#06b27d"]);
 
