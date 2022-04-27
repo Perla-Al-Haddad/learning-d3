@@ -1,7 +1,7 @@
 class MapPieTransition extends MapChartTransition {
-    constructor(chart_id, transition_duration, wait_duration, start_option, data_file_path, colorRange, topojson_file_path) {
+    constructor(chart_id, transition_duration, wait_duration, start_option, data_file_path, colorRange, topojson_file_path, pieColors) {
         super(chart_id, transition_duration, wait_duration, start_option, data_file_path, colorRange, topojson_file_path);
-        this.secondary_chart = new D3PieChart(this.chart_id, 0.6, this.data_file_path);
+        this.secondary_chart = new D3PieChart(this.chart_id, 0.6, this.data_file_path, pieColors);
     }
 
     /**

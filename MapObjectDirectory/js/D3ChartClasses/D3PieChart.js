@@ -1,5 +1,5 @@
 class D3PieChart extends D3Chart {
-    constructor(DOM_ID, chartRatio, data_file_path) {
+    constructor(DOM_ID, chartRatio, data_file_path, colorArray) {
         super(DOM_ID, chartRatio, data_file_path);
 
         this.radius = Math.min(this.width, this.height) / 2;
@@ -11,6 +11,13 @@ class D3PieChart extends D3Chart {
         this.outerArc = d3.arc()
             .innerRadius(this.radius * 0.9)
             .outerRadius(this.radius * 0.9);
+
+        this.colorArray = colorArray;
+
+        this.colorScaleType = "ordinal";
+        if ((typeof this.colorArray) == "string")
+            this.colorScaleType = "linear";
+        console.log(this.colorScaleType)
 
         this.pie = d3.pie()
             .value(function (d) { return d.value; });
@@ -60,7 +67,7 @@ class D3PieChart extends D3Chart {
                 .attr("stroke", "white")
                 .style("stroke-width", "1.5px")
                 .attr("id", function (d) { return "arc_" + d.data.iso; })
-                .attr("fill", function (d, i) { return colorScale(i); })
+                .attr("fill", function (d, i) { return (that.colorScaleType == "ordinal") ? colorScale(i+1) : colorScale(d.value); })
                 .attr("orgStartAngle", function(d) { return d.startAngle; })
                 .attr("orgEndAngle", function(d) { return d.endAngle; })
 
@@ -165,7 +172,7 @@ class D3PieChart extends D3Chart {
                 .attr("fill", "transparent")
                 .attr("stroke-width", 1.5)
                 .attr("id", function(d) { return "line_" + d.data.iso; })
-                .attr("stroke", function(d) { return d3.select("#arc_" + d.data.iso).attr("fill") })
+                .attr("stroke", function(d) { return that.pieGroup.select("#arc_" + d.data.iso).attr("fill") })
                 .attr("points", function(d) { 
                     var pos = that.outerArc.centroid(d);
                     (d3.select("#label_" + d.data.iso).attr("x") > 0) ? pos[0] += 15 : pos[0] -= 15
@@ -184,20 +191,19 @@ class D3PieChart extends D3Chart {
         return country_names;
     }
 
+    getMinAndMax(data) {
+        let max = Math.max.apply(Math, data.map(function (o) { return o.value; }))
+        let min = Math.min.apply(Math, data.map(function (o) { return o.value; }))
+        return [min, max];
+    }
+
     getColorScale(data) {
-        return d3.scaleOrdinal()
-            .domain(this.getCountryNames(data, "country"))
-            .range([
-                "#5470c6",
-                "#91cc75",
-                "#fac858",
-                "#ee6666",
-                "#73c0de",
-                "#3ba272",
-                "#fc8452",
-                "#9a60b4",
-                "#ea7ccc"
-            ]);
+        let country_names = this.getCountryNames(data, "country")
+        if (this.colorScaleType == "ordinal") {
+            return d3.scaleOrdinal().domain(country_names).range(this.colorArray);
+        } else if (this.colorScaleType == "linear") {
+            return d3.scaleLinear().domain(this.getMinAndMax(data)).range([D3ChartSettings.getInstance().pSBC(0.9, this.colorArray), this.colorArray]);
+        }
     }
 
     filterData(data) {
