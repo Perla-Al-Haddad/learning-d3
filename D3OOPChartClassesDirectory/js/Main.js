@@ -55,7 +55,7 @@ $(document).ready(function () {
      */
 
     let map = new D3Map("MapDIV", D3ChartSettings.getInstance().chartRatio, D3ChartSettings.getInstance().escwaRegionMapTopoJSON_path,
-        "assets/data/Ranking_for_GIS_Richness.json", D3ChartSettings.getInstance().yellowRange);
+        "assets/data/Ranking_for_GIS_Richness.json", ["#9e2146", "#fff", "#6772e5"].reverse());
     let bar = new D3BarChart("BarDIV", D3ChartSettings.getInstance().chartRatio, [175, 50, 50, 25], "assets/data/Ranking_for_GIS_Richness.json", "#fac484")
     bar.addTooltip();
 
